@@ -1,5 +1,6 @@
 //I used a file from finance.bi.no as reference
 #include <iostream>
+#include <ctime>
 #include "date.h"
 
 using namespace std;
@@ -10,55 +11,67 @@ using namespace std;
         month = 0;
         day = 0;
     }
-/* no need for this constructor since the other one fits better
+
     Date::Date (int GivenYear, int GivenMonth, int GivenDay)
     {
         year = GivenYear;
         month = GivenMonth;
         day = GivenDay;
     }
-*/
+/*
     Date::Date (int year, int month, int day)
-    {
+    {   
         SetYear(year);
         SetMonth(month);
         SetDay(day);
 
     }
+*/
 
+    Date &Date::operator= (const Date &other)
+    {
+        if (this!=&other)
+        {
+            this->year=other.year;
+            this->month=other.month;
+            this->day=other.day;
+        }
+        
+        return *this;
+    }
 
     int Date::GetYear () const
     {
-        return year;
+        return this->year;
     }
 
     int Date::GetMonth () const
     {
-        return month;
+        return this->month;
     }
 
     int Date::GetDay () const
     {
-        return day;
+        return this->day;
     }
 
     void Date::SetDay (const int &d)
     {
-        Date::day=d;
+        day=d; 
     }
 
     void Date::SetMonth (const int &m)
     {
-        Date::month=m;
+        month=m;
     }
 
     void Date::SetYear (const int &y)
     {
-        Date::year=y;
+        year=y;
     }
 
     void Date::print ()
-    {
+    {  
         cout << year << "-" << month << "-" << day << endl;
     }
 
@@ -88,38 +101,52 @@ using namespace std;
         
     }
 
-    /*DESTRUKTOR
-    Date::~Date(){
-        delete[] Date;
-    }*/
+//this function returns us a long date, although now i think i may not need one
+    int Date::long_date(const Date &date)
+    {  
+        if (date.isValid())
+        {
+            return date.GetYear() * 10000 + date.GetMonth() * 100 + date.GetDay();
+        } else return -1;
+
+    }    
+
+//this function returns us today's date so we can check the expiration date of a product
+    Date Date::today_date()
+    {
+        time_t t = time(NULL);
+        tm* timePtr = localtime(&t);
+        day=timePtr->tm_mday;
+        month=timePtr->tm_mon+1;
+        year=timePtr->tm_year+1900;
+    }
+
 
 //we need operators so that we can check for example the experation date
-   bool operator == (const Date &date1, const Date &date2)
+//fixed operators so they take only 1 argument, not 2 as the earlier version
+   bool Date::operator == (const Date &other)
    {
-       if (date1.isValid() == 0 || date2.isValid() == 0) return false;
-       if ((date1.GetDay()==date2.GetDay()) && (date1.GetMonth()==date2.GetMonth()) && (date1.GetYear()==date2.GetYear()))
-       {
-           return true;
-       } else return false;
+       return year == other.year && month == other.month && day == other.day;
        
    }
     
-    bool operator != (const Date &date1, const Date &date2)
+    bool Date::operator != (const Date &other)
     {
-        return !(date1 == date2);
+        return !(this == &other);
     }
 
-    bool operator < (const Date &date1, const Date &date2)
+    
+    bool Date::operator < (const Date &other)
     {
-        if(date1.GetYear()<date2.GetYear()) return true;
-        else if (date1.GetYear()>date2.GetYear()) return false;
+        if(year < other.year) return true;
+        else if (year > other.year) return false;
         else
         {
-            if (date1.GetMonth()<date2.GetMonth()) return true;
-            else if (date1.GetMonth()>date2.GetMonth()) return false;
+            if (month < other.month) return true;
+            else if (month > other.month) return false;
         else
         {
-            if (date1.GetDay()<date2.GetDay()) return true;
+            if (day < other.day) return true;
         else return false;
         }
         }
@@ -127,38 +154,46 @@ using namespace std;
         return false;
     }
 
-    bool operator > (const Date &date1, const Date &date2)
+    bool Date::operator > (const Date &other)
     {
-        if (date1 == date2) return false;
-        if (date1 < date2)  return false;
+        if (this == &other) return false;
+        if (this < &other)  return false;
         return true;
 
     }
 
-    bool operator >= (const Date &date1, const Date &date2)
+    bool Date::operator >= (const Date &other)
     {
-        if (date1==date2) return true;
-        return date1>date2;
+        if (this== &other) return true;
+        return this > &other;
     }
 
-    bool operator <= (const Date &date1, const Date &date2)
+    bool Date::operator <= (const Date &other)
     {
-        if (date1==date2) return true;
-        return date1<date2;
+        if (this == &other) return true;
+        return this < &other;
     }
 
-   // bool operator = ()
+  
 
    ostream& operator << (ostream& output, const Date &date)
-    {
+    {   if(date.isValid())
+        {
         output << date.year<<"-"<<date.month<<"-"<<date.day<<endl;
         return output;
+        } else cout<<"Invalid date!"<<endl;
     }
 
     istream& operator >> (istream& input, Date &date)
     {
+        do
+        {
         input >> date.year >> date.month >> date.day;
+        } while (date.isValid() == 0);
         return input;
     }
+
+
+
 
  

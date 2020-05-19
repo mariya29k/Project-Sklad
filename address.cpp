@@ -1,42 +1,49 @@
 #include <iostream>
+#include "address.h"
+#include "product.h"
 using namespace std;
 
-class Address 
-{
-    private :
-    char section;
-    int raft;
-    int number;
-
-    public :
-    
-    Address ()
+    Address::Address ()
     {
-
+        SetSection('A');
+        SetRaft(0);
+        SetNumber(0);
     }
 
-    Address (char section, int raft, int number)
+    Address::Address (char section, int raft, int number)
     {
         SetSection(section);
         SetRaft(raft);
         SetNumber(number);
     }
 
-    void SetSection (const char &section_)
+    Address &Address::operator= (const Address &other)
     {
-        if(section_ < 'A' || section > 'Z')
+        if (this!=&other)
         {
-            cout<<"Section must be an upper letter!"
+            this->section=other.section;
+            this->raft=other.raft;
+            this->number=other.number;
         }
-            else section = section_;
+        
+        return *this;
     }
 
-    char GetSection () const
+    void Address::SetSection (char section_)
     {
-        return section;
+        if(section_ < 'A' || section_ > 'Z')
+        {
+            cout<<"Section must be an upper letter!";
+        }
+        else this->section=section_;
     }
 
-    void SetRaft (const int &raft_)
+    char Address::GetSection () const
+    {
+        return this->section;
+    }
+
+    void Address::SetRaft (const int &raft_)
     {
         if(raft_ < 1 || raft > 200)
         {
@@ -45,12 +52,12 @@ class Address
             else raft = raft_;
     }
 
-    int GetRaft () const
+    int Address::GetRaft () const
     {
-        return raft;
+        return this->raft;
     }
 
-    void SetNumber (const int &number_)
+    void Address::SetNumber (const int &number_)
     {
         if (number_ < 1 || number_ > 300)
         {
@@ -59,12 +66,19 @@ class Address
             else number = number_;
     }
 
-    int GetNumber () const
+    int Address::GetNumber () const
     {
-        return number;
+        return this->number;
     }
 
     
-
-
-};
+    void Address::setaddress (const Product& product)
+    {
+        for (char a = 'A'; a <= 'Z'; ++a)
+        {
+            for (int i = 1; i<=200; i++) 
+            {
+                for (int j = 1;)
+            }
+        }
+    }

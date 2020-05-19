@@ -23,9 +23,8 @@
         }
         cout<<date3;
 
-        Date date4;
-        cin>>date4;
-        cout<<date4;
+        
+        
 
         return 0;
     

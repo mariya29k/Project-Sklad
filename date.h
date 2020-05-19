@@ -15,6 +15,7 @@ class Date
     Date ();
     //Date (int GivenYear, int GivenMonth, int GivenDay);
     Date (int year, int month, int day);
+    Date &operator= (const Date &other);
     int GetYear () const;
     int GetMonth () const;
     int GetDay () const;
@@ -24,15 +25,18 @@ class Date
     void print ();
     bool isValid () const; 
     bool isLeap (int y) const;
-    //~Date();
+    int long_date(const Date &date);
+    Date today_date();
     friend ostream& operator << (ostream& output, const Date &date);
     friend istream& operator >> (istream& input, Date &date);
+    bool operator == (const Date &other);
+    bool operator != (const Date &other);
+    bool operator < (const Date &other);
+    bool operator > (const Date &other);
+    bool operator >= (const Date &other);
+    bool operator <= (const Date &other);
 };
-    bool operator == (const Date &date1, const Date &date2);
-    bool operator != (const Date &date1, const Date &date2);
-    bool operator < (const Date &date1, const Date &date2);
-    bool operator > (const Date &date1, const Date &date2);
-    bool operator >= (const Date &date1, const Date &date2);
-    bool operator <= (const Date &date1, const Date &date2);
+   
+   
 
     
