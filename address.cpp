@@ -3,82 +3,38 @@
 #include "product.h"
 using namespace std;
 
+//Storage has 26 sections, 200 shelves, 300 numbers - 1number can take up to 10kg/litres
     Address::Address ()
     {
-        SetSection('A');
-        SetRaft(0);
-        SetNumber(0);
+        section = 0;
+        shelf = 0;
+        number = 0;
     }
 
-    Address::Address (char section, int raft, int number)
+    Address::Address (int section, int raft, int number)
     {
-        SetSection(section);
-        SetRaft(raft);
-        SetNumber(number);
+        this->section = section;
+        this->shelf = shelf;
+        this->number = number;
     }
-
-    Address &Address::operator= (const Address &other)
-    {
-        if (this!=&other)
-        {
-            this->section=other.section;
-            this->raft=other.raft;
-            this->number=other.number;
-        }
-        
-        return *this;
-    }
-
-    void Address::SetSection (char section_)
-    {
-        if(section_ < 'A' || section_ > 'Z')
-        {
-            cout<<"Section must be an upper letter!";
-        }
-        else this->section=section_;
-    }
-
-    char Address::GetSection () const
-    {
-        return this->section;
-    }
-
-    void Address::SetRaft (const int &raft_)
-    {
-        if(raft_ < 1 || raft > 200)
-        {
-            cout<< "No place left in storage";
-        }
-            else raft = raft_;
-    }
-
-    int Address::GetRaft () const
-    {
-        return this->raft;
-    }
-
-    void Address::SetNumber (const int &number_)
-    {
-        if (number_ < 1 || number_ > 300)
-        {
-            cout<< "No place left in storage";
-        }
-            else number = number_;
-    }
-
-    int Address::GetNumber () const
-    {
-        return this->number;
-    }
-
     
-    void Address::setaddress (const Product& product)
+    //kopikonstruktor
+
+    bool Address::operator== (const Address &other)
     {
-        for (char a = 'A'; a <= 'Z'; ++a)
-        {
-            for (int i = 1; i<=200; i++) 
-            {
-                for (int j = 1;)
-            }
-        }
+        return section == other.section && shelf == other.shelf && number == other.number;
     }
+
+
+
+    // Address &Address::operator= (const Address &other)
+    // {
+    //     if (this!=&other)
+    //     {
+    //         this->section=other.section;
+    //         this->raft=other.raft;
+    //         this->number=other.number;
+    //     }
+        
+    //     return *this;
+    // }

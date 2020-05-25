@@ -8,7 +8,7 @@
 
 using namespace std;
     
-    int Product:: product_id =1000;
+    //int Product:: product_id =1000;
 
     Product::Product ()
     {
@@ -20,7 +20,7 @@ using namespace std;
         this->availability = 0.0;
         this->address = Address();
         SetComment("default");
-        this->id = product_id++;
+        //this->id = product_id++;
         
     }
 
@@ -35,7 +35,7 @@ using namespace std;
         availability = other.availability;
         address = other.address;
         comment = other.comment;
-        id = other.id;
+        //id = other.id;
     }
 
     Product:: Product (char *name_, Date expiration_, Date inStorage_, char* manufacturer_, double weight_, string comment_)
@@ -47,7 +47,7 @@ using namespace std;
         weight = weight_;
         availability = 1;
         comment = comment_;
-        Address address;
+        address = Address();
         
 
     }
@@ -66,7 +66,7 @@ using namespace std;
     }
 
 //how to do that thingy here
-    Date Product::SetExpiration()//tuk tr proverq dali datata, koqto setvame e validna, no nz kak, sushtoto i za instorage mai tr pri samiq  operator>> na dates
+    void Product::SetExpiration()//tuk tr proverq dali datata, koqto setvame e validna, no nz kak, sushtoto i za instorage mai tr pri samiq  operator>> na dates
     {   
         cin>>expiration_date;
     }
@@ -76,7 +76,7 @@ using namespace std;
         return this->expiration_date;
     }
 
-    Date Product::SetinStorage()
+    void Product::SetinStorage()
     {  
         cin>>in_storage;
     }
@@ -128,15 +128,29 @@ using namespace std;
         comment = comment_;
     }
 
-    int Product::GetID () const
+    // int Product::GetID () const
+    // {
+    //     return this->id;
+    // }
+
+    // void Product::print()
+    // {
+    //     cout<<product.GetName()
+    // }
+
+    bool Product::operator== (const Product &other)
     {
-        return this->id;
+        return name == other.name && expiration_date == other.expiration_date && in_storage == other.in_storage && manufacturer == other.manufacturer 
+                && weight == other.weight && availability == other.availability && address == other.address && comment == other.comment;
     }
 
-    void Product::print()
+    void Product::setAddress (Address address)
     {
-        cout<<product.GetName()
+        this->address = address;
     }
-
-
+    
+    Address Product::getAddress () const
+    {
+        return this->address;
+    }
 

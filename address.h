@@ -6,19 +6,20 @@ using namespace std;
 class Address 
 {
     private :
-    char section;
-    int raft;
+    int section;
+    int shelf;
     int number;
 
     public :
     Address ();
-    Address (char section, int raft, int number);
-    Address &operator= (const Address &other);
-    void SetSection (char section_);
-    char GetSection () const;
-    void SetRaft (const int &raft_);
-    int GetRaft () const;
-    void SetNumber (const int &number_);
-    int GetNumber () const;
-    void setaddress (const Product& product);
+    Address (int section, int shelf, int number);
+    bool operator== (const Address &other);
+    //Address &operator= (const Address &other);
+    //void SetSection (char section_);
+    // char GetSection () const;
+    // void SetShelf (const int &shelf_);
+    // int GetShelf () const;
+    // void SetNumber (const int &number_);
+    // int GetNumber () const;
+    //void setAddress (const Product& product);
 };

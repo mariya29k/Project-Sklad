@@ -18,8 +18,8 @@ class Product
     Address address;
     string comment;
     
-    int id;
-    static int product_id;
+    //int id;
+    //static int product_id;
 
     public:
     
@@ -38,8 +38,11 @@ class Product
     void SetWeight (double weight_);
     int GetAvailability () const;
     void SetAvailability (int availability_);
-    string GetComment();
+    string GetComment() const;
     void SetComment(string comment_);
     int GetID () const;
     void print();
+    void setAddress (Address address);
+    Address getAddress () const;
+    bool operator== (const Product &product);
 };
