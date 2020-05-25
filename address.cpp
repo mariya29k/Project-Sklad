@@ -18,7 +18,12 @@ using namespace std;
         this->number = number;
     }
     
-    //kopikonstruktor
+    Address::Address (Address &other)
+    {
+        this->section = other.section;
+        this->shelf = other.shelf;
+        this->number = other.number;
+    }
 
     bool Address::operator== (const Address &other)
     {
@@ -32,16 +37,14 @@ using namespace std;
        
     }
 
-
-
-    // Address &Address::operator= (const Address &other)
-    // {
-    //     if (this!=&other)
-    //     {
-    //         this->section=other.section;
-    //         this->raft=other.raft;
-    //         this->number=other.number;
-    //     }
+    Address &Address::operator= (const Address &other)
+    {
+        if (this!=&other)
+        {
+            this->section=other.section;
+            this->raft=other.raft;
+            this->number=other.number;
+        }
         
-    //     return *this;
-    // }
+        return *this;
+    }

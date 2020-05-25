@@ -13,9 +13,10 @@ class Address
     public :
     Address ();
     Address (int section, int shelf, int number);
+    Address (Address &other);
     bool operator== (const Address &other);
     friend ostream& operator << (ostream& output, const Address &address);
-    //Address &operator= (const Address &other);
+    Address &operator= (const Address &other);
     //void SetSection (char section_);
     // char GetSection () const;
     // void SetShelf (const int &shelf_);
