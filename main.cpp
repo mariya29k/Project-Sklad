@@ -1,74 +1,35 @@
 #include <iostream>
-#include <fstream>
+#include "commands.h"
 
 using namespace std;
 
-void Open ()
-{//ofstream???
-    ifstream StorageFile;
-    //first we check whether the file is already opened
-    if(StorageFile.is_open())
-    {
-        cout<<"File is already opened! ";
-    } else StorageFile.open("storage.txt"); //("", ios::app/ios::out)?
-
-    //then we check for errors
-    if (StorageFile.fail())
-    {
-        cout<<"Error opening file! ";
-        exit(1); //we close the program 
-    }
-
-    int x,y;
-    StorageFile>>x>>y;
-    cout<<"num1 : "<< x<< "num 2: "<<y;
-}
-
-//void Close () - moje bi prosto shte go sloja v if-a s komandite?
-
-
-
-void help ()
-{
-    cout <<"------------------------------------------------------------------------\n";
-    cout <<"| 1. Open <file>           opens the file                              |\n"
-         <<"| 2. Close                 closes currently opened file                |\n"
-         <<"| 3. save                  saves the currently open file               |\n"
-         <<"| 4. save as <file>        saves the currently open file in a <file>   |\n"
-         <<"| 5. help                  prints this information                     |\n"
-         <<"| 6. exit                  exists the program                          |\n"
-         <<"| 7. print                 prints all the products in storage          |\n"
-         <<"| 8. add                   adds a new product to storage               |\n"
-         <<"| 9. remove                removes a product from storage              |\n";
-    cout <<"------------------------------------------------------------------------\n";
-}
-
-void add ()
-{
-    cout<<"You are adding a new product to storage! "<<endl;
-    cout<<"Add the name of the product: "<<endl;
-    //cin.ignore()
-    //getline()
-    cout<<"Enter the expiration date of the product: "<<endl;
-    // tuk da checknem dali e validna datata i dali ne e minala veche
-    cout<<"Enter the date when the product came in: "<<endl;
-    // dali datata e validna
-    cout<<"Enter the name of the manufacturer: "<<endl;
-    //
-    cout<<"Enter weight: "<<endl;
-    //
-    cout<<"Enter a comment about the product: "<<endl;
-    //
-    //adresa mai tr sami da si go zadadem
-
-}
 
 int main ()
 {
-
+    int number;
     help();
-    Open();
-    add();
+    
+    while (true)
+    {
+        cout << "Which number do u giv me?? "<<endl;
+        cin >> number;
 
-
+        switch (number)
+        {
+            
+            case 5: 
+                help();
+                break;
+            case 6:
+                cout << "Bye!";
+                exit(1);
+                break;
+            case 8:
+                add();
+                break;
+            default: 
+                cout << "Please enter a valid number"<<endl;
+                break;
+        }
+    }
 }

@@ -1,9 +1,7 @@
 #include <iostream>
 #include "date.h"
-#include "date.cpp"
 #include "product.h"
 #include "address.h"
-#include "address.cpp"
 #include <cstring>
 
 using namespace std;
@@ -25,7 +23,7 @@ using namespace std;
     }
 
 
-    Product:: Product (const Product &other)
+    Product::Product (const Product &other)
     {
         SetName(other.name);
         expiration_date = other.expiration_date;
@@ -38,7 +36,7 @@ using namespace std;
         //id = other.id;
     }
 
-    Product:: Product (char *name_, Date expiration_, Date inStorage_, char* manufacturer_, double weight_, string comment_)
+    Product:: Product (string name_, Date expiration_, Date inStorage_, string manufacturer_, double weight_, string comment_)
     {
         name = name_;
         expiration_date = expiration_;
@@ -54,21 +52,20 @@ using namespace std;
 
 
 
-    const char* Product::GetName () const //tova moje bi tr da e string
+    string Product::GetName () const //tova moje bi tr da e string
     {
         return this->name;
     }
 
-    void Product::SetName (const char* name_) 
+    void Product::SetName (const string name_) 
     {
-        this->name=new char[strlen(name_)+1]; //tuk moje bi ne tr ima_
-        strcpy(this->name, name_);
+        this->name = name_;
     }
 
 //how to do that thingy here
-    void Product::SetExpiration()//tuk tr proverq dali datata, koqto setvame e validna, no nz kak, sushtoto i za instorage mai tr pri samiq  operator>> na dates
+    void Product::SetExpiration(const Date expiration)
     {   
-        cin>>expiration_date;
+        this->expiration_date = expiration;   
     }
 
     Date Product::GetExpiration() const
@@ -76,9 +73,9 @@ using namespace std;
         return this->expiration_date;
     }
 
-    void Product::SetinStorage()
+    void Product::SetinStorage(const Date storage)
     {  
-        cin>>in_storage;
+        this->in_storage = storage;
     }
 
     Date Product::GetinStorage() const
@@ -86,15 +83,14 @@ using namespace std;
         return this->in_storage;
     }
 
-    const char* Product::GetManufacturer() const
+    string Product::GetManufacturer() const
     {
         return this->manufacturer;
     }
     
-    void Product::SetManufacturer (const char* manufacturer_)
+    void Product::SetManufacturer (string manufacturer_)
     {
-        this->manufacturer=new char[strlen(manufacturer_)+1]; //tuk moje bi ne tr ima_
-        strcpy(this->manufacturer, manufacturer_);
+        this->manufacturer = manufacturer_;
     }
 
     double Product::GetWeight () const
@@ -152,5 +148,13 @@ using namespace std;
     Address Product::getAddress () const
     {
         return this->address;
+    }
+
+    ostream& operator << (ostream& output, const Product &product)
+    {   
+        output << product.GetName() << " "<< product.GetExpiration() << " " << product.GetinStorage() << " " << product.GetManufacturer() << " " 
+                << product.GetWeight() << " " <<product.getAddress() << " "<< product.GetComment() << endl;
+        return output;
+       
     }
 

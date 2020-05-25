@@ -14,6 +14,7 @@ class Address
     Address ();
     Address (int section, int shelf, int number);
     bool operator== (const Address &other);
+    friend ostream& operator << (ostream& output, const Address &address);
     //Address &operator= (const Address &other);
     //void SetSection (char section_);
     // char GetSection () const;

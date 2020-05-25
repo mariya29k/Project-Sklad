@@ -9,10 +9,10 @@ using namespace std;
 class Product
 {
     private:
-    char* name;
+    string name;
     Date expiration_date;
     Date in_storage;
-    char* manufacturer;
+    string manufacturer;
     double weight;
     int availability;
     Address address;
@@ -25,15 +25,15 @@ class Product
     
     Product ();
     Product (const Product &other);
-    Product (char *name_, Date expiration_, Date inStorage_, char* manufacturer_, double weight_, string comment_);
-    const char* GetName () const;
-    void SetName (const char* name_);
-    void SetExpiration();
+    Product (string name_, Date expiration_, Date inStorage_, string manufacturer_, double weight_, string comment_);
+    string GetName () const;
+    void SetName (string name_);
+    void SetExpiration(const Date expiration);
     Date GetExpiration() const;
-    void SetinStorage();
+    void SetinStorage(const Date storage);
     Date GetinStorage() const;
-    const char* GetManufacturer() const;
-    void SetManufacturer (const char* manufacturer_);
+    string GetManufacturer() const;
+    void SetManufacturer (string manufacturer_);
     double GetWeight () const;
     void SetWeight (double weight_);
     int GetAvailability () const;
@@ -45,4 +45,5 @@ class Product
     void setAddress (Address address);
     Address getAddress () const;
     bool operator== (const Product &product);
+    friend ostream& operator << (ostream& output, const Product &product);
 };

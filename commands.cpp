@@ -53,27 +53,31 @@ void help ()
 
 void add ()
 {   //ako si pravq produkta kato vektor s push_back shte stane
+    string name; //ili * ili []
+    Date expiration;
+    Date in_storage;
+    string manufacturer;
+    double weight;
+    string comment;
+
     cout<<"You are adding a new product to storage! "<<endl;
     cout<<"Add the name of the product: "<<endl;
-    char *name;
     cin>>name;
     cout<<"\n Enter the expiration date of the product: "<<endl;
-    Date expiration;
     cin>>expiration;
     cout<<"\n Enter the date when the product came in: "<<endl;
-    Date in_storage;
     cin>>in_storage;
     cout<<"\n Enter the name of the manufacturer: "<<endl;
-    char *manufacturer;
     cin>>manufacturer;
     cout<<"\n Enter weight: "<<endl;
-    double weight;
     cin>>weight;
     cout<<"\n Enter a comment about the product: "<<endl;
-    string comment;
-    cin>>comment;
-    Product *current = new Product(name, expiration, in_storage, manufacturer, weight, comment);
-    cout<<current;
+    cin.get();
+    getline(cin,comment);
+    cout<<endl;
+
+    Product current = Product(name, expiration, in_storage, manufacturer, weight, comment);
+    cout<<current<<endl;
 }
 
     /*void clean (Product &product) //ama tva trie samo edin produkt mai mai, shtoto tr da izvurti vs produkti v sklada i za vseki da proveri
@@ -85,8 +89,4 @@ void add ()
         }
     }*/
 
-    int main ()
-    {
-        add();
-        
-    }
+  

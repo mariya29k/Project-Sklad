@@ -25,6 +25,13 @@ using namespace std;
         return section == other.section && shelf == other.shelf && number == other.number;
     }
 
+    ostream& operator << (ostream& output, const Address &address)
+    {   
+        output << address.section << "-" << address.shelf << "-" << address.number;
+        return output;
+       
+    }
+
 
 
     // Address &Address::operator= (const Address &other)

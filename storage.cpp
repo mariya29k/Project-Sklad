@@ -2,7 +2,6 @@
 #include <vector>
 #include <cmath>
 #include "product.h"
-#include "product.cpp"
 #include "date.h"
 
 using namespace std;

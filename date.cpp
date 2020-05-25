@@ -1,4 +1,3 @@
-//I used a file from finance.bi.no as reference
 #include <iostream>
 #include <ctime>
 #include "date.h"
@@ -186,10 +185,9 @@ using namespace std;
 
     istream& operator >> (istream& input, Date &date)
     {
-        do
-        {
+       
         input >> date.year >> date.month >> date.day;
-        } while (date.isValid() == 0);
+
         return input;
     }
 
