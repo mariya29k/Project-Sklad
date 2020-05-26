@@ -63,13 +63,13 @@ void add ()
     string comment;
 
     cout<<"You are adding a new product to storage! "<<endl;
-    cout<<"Add the name of the product: "<<endl;
+    cout<<"Add the name of the product: "<<endl; //no space people!!
     cin>>name;
     cout<<"\n Enter the expiration date of the product: "<<endl;
     cin>>expiration;
     cout<<"\n Enter the date when the product came in: "<<endl;
     cin>>in_storage;
-    cout<<"\n Enter the name of the manufacturer: "<<endl;
+    cout<<"\n Enter the name of the manufacturer: "<<endl; //sloji da ne slagat space
     cin>>manufacturer;
     cout<<"\n Enter weight: "<<endl;
     cin>>weight;
@@ -82,6 +82,19 @@ void add ()
     storage.addProduct(current);
     cout<<current<<endl;
 }
+
+    void remove()
+    {
+        string name;
+        double weight;
+        //int quantity;
+        cout<<"You are removing a product from storage!"<<endl;
+        cout<<"Enter the name of the product you want removed: "<<endl;
+        cin>>name;
+        cout<<"Enter the quantity you want removed: "<<endl;
+        cin>>weight;
+        cout<<storage.removeProduct(name, weight);
+    }
 
     /*void clean (Product &product) //ama tva trie samo edin produkt mai mai, shtoto tr da izvurti vs produkti v sklada i za vseki da proveri
     {

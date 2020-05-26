@@ -41,7 +41,6 @@ class Product
     string GetComment() const;
     void SetComment(string comment_);
     int GetID () const;
-    void print();
     void SetAddress (Address address);
     Address GetAddress () const;
     bool operator== (const Product &product);

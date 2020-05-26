@@ -27,6 +27,9 @@ int main ()
             case 8:
                 add();
                 break;
+            case 9:
+                remove();
+                break;
             default: 
                 cout << "Please enter a valid number"<<endl;
                 break;

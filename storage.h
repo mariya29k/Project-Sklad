@@ -20,10 +20,12 @@ class Storage
     Product array [max_section * max_shelf * max_number];
 
     int GetIndex (int i, int j, int k);
+    void ShiftProducts (int index);
 
     public:
     Storage();
     bool addProduct(Product &product);
+    Product removeProduct(string name, double weight);
     void expired ();
     
 

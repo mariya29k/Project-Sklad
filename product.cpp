@@ -129,10 +129,7 @@ using namespace std;
     //     return this->id;
     // }
 
-    // void Product::print()
-    // {
-    //     cout<<product.GetName()
-    // }
+    
 
     bool Product::operator== (const Product &other)
     {
@@ -150,11 +147,17 @@ using namespace std;
         return this->address;
     }
 
-    ostream& operator << (ostream& output, const Product &product)
+    ostream& operator << (ostream& out, const Product &product)
     {   
-        output << product.GetName() << " "<< product.GetExpiration() << " " << product.GetinStorage() << " " << product.GetManufacturer() << " " 
-                << product.GetWeight() << " " <<product.GetAddress() << " "<< product.GetComment() << endl;
-        return output;
-       
+        out<<"Name: "<<product.GetName()<<endl;
+        out<<"Expiration date: "<<product.GetExpiration()<<endl;
+        out<<"Came in storage: "<<product.GetinStorage()<<endl;
+        out<<"Manufacturer: "<<product.GetManufacturer()<<endl;
+        out<<"Weight: "<<product.GetWeight()<<endl;
+        out<<"Availability: "<<product.GetAvailability()<<endl;
+        out<<"Address: "<<product.GetAddress()<<endl;
+        out<<"Comment: "<<product.GetComment()<<endl;
+        
+        return out;
     }
 
