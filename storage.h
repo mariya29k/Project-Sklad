@@ -15,19 +15,23 @@ class Storage
     static const int max_number = 300;
     static const int slot_size = 10;
 
+    int GetIndex (int i, int j, int k) const;
+
     vector<Product> products;
     Date today;
     Product array [max_section * max_shelf * max_number];
 
-    int GetIndex (int i, int j, int k);
     void ShiftProducts (int index);
 
     public:
+
     Storage();
     bool addProduct(Product &product);
     Product removeProduct(string name, double weight);
-    void expired ();
+    Product expired ();
+    void IncreaseAvailability(Product product);
     
+    friend ostream& operator << (ostream& output, const Storage &storage);
 
     
 };

@@ -83,26 +83,29 @@ void add ()
     cout<<current<<endl;
 }
 
-    void remove()
-    {
-        string name;
-        double weight;
-        //int quantity;
-        cout<<"You are removing a product from storage!"<<endl;
-        cout<<"Enter the name of the product you want removed: "<<endl;
-        cin>>name;
-        cout<<"Enter the quantity you want removed: "<<endl;
-        cin>>weight;
-        cout<<storage.removeProduct(name, weight);
-    }
 
-    /*void clean (Product &product) //ama tva trie samo edin produkt mai mai, shtoto tr da izvurti vs produkti v sklada i za vseki da proveri
-    {
-        Date today;
-        if(product.GetExpiration()==today.today_date())
-        {
-            products.erase(products.begin()+product.GetID());
-        }
-    }*/
+void print()
+{
+    cout<<storage;
+}
+
+
+void remove()
+{
+    string name;
+    double weight;
+    //int quantity;
+    cout<<"You are removing a product from storage!"<<endl;
+    cout<<"Enter the name of the product you want removed: "<<endl;
+    cin>>name;
+    cout<<"Enter the quantity you want removed: "<<endl;
+    cin>>weight;
+    cout<<storage.removeProduct(name, weight);
+}
+
+void clean()
+{
+    cout<<storage.expired();
+}
 
   

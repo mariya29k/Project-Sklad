@@ -15,7 +15,7 @@ Storage::Storage()
     }
 }
 
-int Storage::GetIndex (int i, int j, int k)
+int Storage::GetIndex (int i, int j, int k) const
 {
     return i * max_shelf * max_number + j * max_number + k; //tova ni vrushta adresa poneje shte ni e array 
 }
@@ -106,7 +106,76 @@ Product Storage::removeProduct(string name, double weight)
     return Product();  //ako ne nameri takuv produkt     
 }
 
-void Storage::expired ()  {}
 
+Product Storage::expired()
+{
+    for (int i = 0 ; i < max_section; ++i)
+    {
+        for ( int j = 0; j < max_shelf; ++j)
+        {
+            for (int k = 0; k < max_number; ++k)
+            {
+                Date today;
+                int index = GetIndex(i,j,k);
+                Product product = array[index];
+                bool is_expired = false;
+                while (array[index].GetExpiration() == today.today_date())
+                {
+                    ShiftProducts(index);
+                    is_expired = true;
+                }
+                if (is_expired)
+                {
+                    return product;
+                }
+            }
+        }
+    }
+    return Product();        
+
+
+}
+
+//clean ne baca
+//sq kolichestvo, partidi tuka se oburkah jestoko
+void Storage::IncreaseAvailability (Product product)
+{
+    for (int i = 0 ; i < max_section; ++i)
+    {
+        for ( int j = 0; j < max_shelf; ++j)
+        {
+            for (int k = 0; k < max_number; ++k)
+            {
+                int index = GetIndex(i,j,k);
+                Product product = array[index];
+                int quantity = 1;
+                while (array[index].GetName() == product.GetName())
+                {
+                    quantity++;
+                }
+                product.SetAvailability(quantity);
+                
+            }
+        }
+    }
+      
+}
+
+
+ostream& operator << (ostream& output, const Storage &storage)
+{
+    for (int i = 0 ; i < storage.max_section; ++i)
+    {
+        for ( int j = 0; j < storage.max_shelf; ++j)
+        {
+            for (int k = 0; k < storage.max_number; ++k)
+            {
+                int index = storage.GetIndex(i,j,k);
+                output<<storage.array[index]<<endl;
+            }
+        }
+    }
+    return output;      
+}
 
     

@@ -6,6 +6,9 @@ using namespace std;
 void Open();
 void help();
 void add();
+void print();
 void remove();
+void clean();
+
 
 

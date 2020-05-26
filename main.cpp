@@ -24,11 +24,17 @@ int main ()
                 cout << "Bye!";
                 exit(0);
                 break;
+            case 7:
+                print();
+                break;
             case 8:
                 add();
                 break;
             case 9:
                 remove();
+                break;
+            case 11:
+                clean();
                 break;
             default: 
                 cout << "Please enter a valid number"<<endl;
