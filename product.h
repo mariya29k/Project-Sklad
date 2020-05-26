@@ -42,8 +42,8 @@ class Product
     void SetComment(string comment_);
     int GetID () const;
     void print();
-    void setAddress (Address address);
-    Address getAddress () const;
+    void SetAddress (Address address);
+    Address GetAddress () const;
     bool operator== (const Product &product);
     friend ostream& operator << (ostream& output, const Product &product);
 };

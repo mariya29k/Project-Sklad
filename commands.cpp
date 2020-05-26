@@ -3,11 +3,13 @@
 #include <string>
 #include "product.h"
 #include "date.h"
+#include "storage.h"
 
 
 using namespace std;
 
-Product products;
+Storage storage;
+
 
 void Open ()
 {//ofstream???
@@ -77,6 +79,7 @@ void add ()
     cout<<endl;
 
     Product current = Product(name, expiration, in_storage, manufacturer, weight, comment);
+    storage.addProduct(current);
     cout<<current<<endl;
 }
 

@@ -22,7 +22,7 @@ int main ()
                 break;
             case 6:
                 cout << "Bye!";
-                exit(1);
+                exit(0);
                 break;
             case 8:
                 add();

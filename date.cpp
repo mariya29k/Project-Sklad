@@ -13,9 +13,9 @@ using namespace std;
 
     Date::Date (int GivenYear, int GivenMonth, int GivenDay)
     {
-        year = GivenYear;
-        month = GivenMonth;
-        day = GivenDay;
+        this->year = GivenYear;
+        this->month = GivenMonth;
+        this->day = GivenDay;
     }
 /*
     Date::Date (int year, int month, int day)

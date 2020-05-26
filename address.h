@@ -13,7 +13,8 @@ class Address
     public :
     Address ();
     Address (int section, int shelf, int number);
-    Address (Address &other);
+    Address (const Address &other);
+    Address GetAddress() const;
     bool operator== (const Address &other);
     friend ostream& operator << (ostream& output, const Address &address);
     Address &operator= (const Address &other);

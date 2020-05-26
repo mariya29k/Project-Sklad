@@ -11,19 +11,20 @@ using namespace std;
         number = 0;
     }
 
-    Address::Address (int section, int raft, int number)
+    Address::Address (int section, int shelf, int number)
     {
         this->section = section;
         this->shelf = shelf;
         this->number = number;
     }
     
-    Address::Address (Address &other)
+    Address::Address (const Address &other)
     {
         this->section = other.section;
         this->shelf = other.shelf;
         this->number = other.number;
     }
+
 
     bool Address::operator== (const Address &other)
     {
@@ -42,7 +43,7 @@ using namespace std;
         if (this!=&other)
         {
             this->section=other.section;
-            this->raft=other.raft;
+            this->shelf=other.shelf;
             this->number=other.number;
         }
         

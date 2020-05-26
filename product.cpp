@@ -140,12 +140,12 @@ using namespace std;
                 && weight == other.weight && availability == other.availability && address == other.address && comment == other.comment;
     }
 
-    void Product::setAddress (Address address)
+    void Product::SetAddress (Address address)
     {
         this->address = address;
     }
     
-    Address Product::getAddress () const
+    Address Product::GetAddress () const
     {
         return this->address;
     }
@@ -153,7 +153,7 @@ using namespace std;
     ostream& operator << (ostream& output, const Product &product)
     {   
         output << product.GetName() << " "<< product.GetExpiration() << " " << product.GetinStorage() << " " << product.GetManufacturer() << " " 
-                << product.GetWeight() << " " <<product.getAddress() << " "<< product.GetComment() << endl;
+                << product.GetWeight() << " " <<product.GetAddress() << " "<< product.GetComment() << endl;
         return output;
        
     }
