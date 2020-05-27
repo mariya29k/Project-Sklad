@@ -15,6 +15,8 @@ class Date
     Date ();
     //Date (int GivenYear, int GivenMonth, int GivenDay);
     Date (int year, int month, int day);
+    Date (const Date &other);
+    void SetDate (const int &year, const int &month, const int &day);
     Date &operator= (const Date &other);
     int GetYear () const;
     int GetMonth () const;

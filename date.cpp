@@ -6,9 +6,9 @@ using namespace std;
 
     Date::Date ()
     {
-        year = 0;
-        month = 0;
-        day = 0;
+        year = 1;
+        month = 1;
+        day = 1;
     }
 
     Date::Date (int GivenYear, int GivenMonth, int GivenDay)
@@ -16,6 +16,20 @@ using namespace std;
         this->year = GivenYear;
         this->month = GivenMonth;
         this->day = GivenDay;
+    }
+
+    Date::Date (const Date &other)
+    {
+        this->year = other.year;
+        this->month = other.month;
+        this->day = other.day;
+    }
+
+    void Date::SetDate (const int &year, const int &month, const int &day)
+    {
+        this->year = year;
+        this->month = month;
+        this->day = day;   
     }
 /*
     Date::Date (int year, int month, int day)
@@ -123,11 +137,11 @@ using namespace std;
 
 //we need operators so that we can check for example the experation date
 //fixed operators so they take only 1 argument, not 2 as the earlier version
-   bool Date::operator == (const Date &other)
-   {
-       return year == other.year && month == other.month && day == other.day;
-       
-   }
+    bool Date::operator == (const Date &other)
+    {
+    return year == other.year && month == other.month && day == other.day;
+
+    }
     
     bool Date::operator != (const Date &other)
     {
