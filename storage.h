@@ -9,13 +9,15 @@ using namespace std;
 
 class Storage
 {
-    private:
+    public:
     static const int max_section = 26;
     static const int max_shelf = 200;
     static const int max_number = 300;
     static const int slot_size = 10;
 
+    private:
     int GetIndex (int i, int j, int k) const;
+
 
     vector<Product> products;
     Date today;

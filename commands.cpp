@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <string>
+#include "string.h"
 #include "product.h"
 #include "date.h"
 #include "storage.h"
@@ -18,18 +18,18 @@ void Open ()
     if(StorageFile.is_open())
     {
         cout<<"File is already opened! ";
-    } else StorageFile.open("storage.txt"); //("", ios::app/ios::out)?
+    } else StorageFile.open("input.txt"); //("", ios::app/ios::out)?
 
     //then we check for errors
     if (StorageFile.fail())
     {
         cout<<"Error opening file! ";
-        exit(1); //we close the program 
+        exit(1); //we close the program exit(0) - successfully executed, exit(1) - closed because of fail
     }
 
-    int x,y;
-    StorageFile>>x>>y;
-    cout<<"num1 : "<< x<< "num 2: "<<y;
+    // int x,y;
+    // StorageFile>>x>>y;
+    // cout<<"num1 : "<< x<< "num 2: "<<y;
 }
 
 //void Close () - moje bi prosto shte go sloja v if-a s komandite?
@@ -91,7 +91,7 @@ void print()
 
 
 void remove()
-{
+{//tuk trqbva da poluchava availability, a ne weight ppc
     string name;
     double weight;
     //int quantity;
@@ -103,9 +103,23 @@ void remove()
     cout<<storage.removeProduct(name, weight);
 }
 
+void log()
+{
+    
+}
+
 void clean()
 {
-    cout<<storage.expired();
+    Product removed;
+    cout<<"Expired products! "<<endl;
+    while (true)
+    {
+        removed = storage.expired();
+        if (removed == Product())
+        {
+            break;
+        } else cout<<removed<<endl;
+    } 
 }
 
   

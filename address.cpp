@@ -1,6 +1,7 @@
 #include <iostream>
 #include "address.h"
 #include "product.h"
+#include "storage.h"
 using namespace std;
 
 //Storage has 26 sections, 200 shelves, 300 numbers - 1number can take up to 10kg/litres
@@ -49,3 +50,22 @@ using namespace std;
         
         return *this;
     }
+
+        Address& Address::operator --()
+        { 
+            if(number == (Storage::max_number - 1) )
+            {
+                if (shelf == (Storage::max_shelf - 1))
+                {
+                    if (section == (Storage::max_section -1))
+                    {
+                        //ako sme na 25 section 1 shelf 1 number
+                        //otivamena 24 stilaj 299 shelf 199 number
+                        //no tuk mai bi trqbvalo da se poqvi problem
+                        //s tova kolko slots zaema nashiq produkt
+                        
+                    }
+                }
+            }
+            return *this;
+        }

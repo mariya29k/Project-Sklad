@@ -62,7 +62,7 @@ using namespace std;
         this->name = name_;
     }
 
-//how to do that thingy here
+
     void Product::SetExpiration(const Date expiration)
     {   
         this->expiration_date = expiration;   

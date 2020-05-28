@@ -6,9 +6,9 @@ using namespace std;
 
     Date::Date ()
     {
-        year = 1;
-        month = 1;
-        day = 1;
+        year = -1;
+        month = -1;
+        day = -1;
     }
 
     Date::Date (int GivenYear, int GivenMonth, int GivenDay)
@@ -115,6 +115,7 @@ using namespace std;
     }
 
 //this function returns us a long date, although now i think i may not need one
+//long date may be useful for sorting the products by date to make clean func more useful
     int Date::long_date(const Date &date)
     {  
         if (date.isValid())
@@ -139,7 +140,8 @@ using namespace std;
 //fixed operators so they take only 1 argument, not 2 as the earlier version
     bool Date::operator == (const Date &other)
     {
-    return year == other.year && month == other.month && day == other.day;
+
+        return year == other.year && month == other.month && day == other.day;
 
     }
     
@@ -150,7 +152,10 @@ using namespace std;
 
     
     bool Date::operator < (const Date &other)
-    {
+    {   if (year < 0 || other.year < 0)
+        {
+            throw "Invalid comparison";
+        }
         if(year < other.year) return true;
         else if (year > other.year) return false;
         else

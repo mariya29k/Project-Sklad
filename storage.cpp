@@ -20,6 +20,9 @@ int Storage::GetIndex (int i, int j, int k) const
     return i * max_shelf * max_number + j * max_number + k; //tova ni vrushta adresa poneje shte ni e array 
 }
 
+
+
+//shifts products to the left
 void Storage::ShiftProducts (int index)
 {
     int max_size =  max_section * max_shelf * max_number;
@@ -32,6 +35,7 @@ void Storage::ShiftProducts (int index)
     for (int i = index + 1; i < max_size ; ++i)
     {
         array[i-1] = array[i];
+       // array[i-1] = 
     }
 
     array[max_size -1] = Product();
@@ -116,27 +120,29 @@ Product Storage::expired()
             for (int k = 0; k < max_number; ++k)
             {
                 Date today;
+                today.today_date();
                 int index = GetIndex(i,j,k);
                 Product product = array[index];
                 bool is_expired = false;
-                while (array[index].GetExpiration() == today.today_date())
-                {
+
+                if (array[index].GetExpiration().GetYear() < 0 ) continue;
+                while (array[index].GetExpiration() < today) //not sure if <= is suitable 
+                {                    
                     ShiftProducts(index);
                     is_expired = true;
                 }
                 if (is_expired)
                 {
                     return product;
-                }
+                } 
             }
         }
+
     }
     return Product();        
-
-
 }
 
-//clean ne baca
+//clean vrushta samo 1viq produkt s iztekul srok i ne produljava s drugite
 //sq kolichestvo, partidi tuka se oburkah jestoko
 void Storage::IncreaseAvailability (Product product)
 {
@@ -154,7 +160,7 @@ void Storage::IncreaseAvailability (Product product)
                     quantity++;
                 }
                 product.SetAvailability(quantity);
-                
+                cout<<product.GetAvailability();
             }
         }
     }
