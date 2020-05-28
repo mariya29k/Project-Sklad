@@ -19,11 +19,5 @@ class Address
     friend ostream& operator << (ostream& output, const Address &address);
     Address &operator= (const Address &other);
     Address &operator-- ();
-    //void SetSection (char section_);
-    // char GetSection () const;
-    // void SetShelf (const int &shelf_);
-    // int GetShelf () const;
-    // void SetNumber (const int &number_);
-    // int GetNumber () const;
-    //void setAddress (const Product& product);
+  
 };

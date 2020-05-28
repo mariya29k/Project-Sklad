@@ -53,19 +53,46 @@ using namespace std;
 
         Address& Address::operator --()
         { 
-            if(number == (Storage::max_number - 1) )
+
+            Address address(section, shelf, number);
+
+            if (section !=0) 
             {
-                if (shelf == (Storage::max_shelf - 1))
+                if (shelf != 0)
                 {
-                    if (section == (Storage::max_section -1))
+                   if (number == 0)
+                   {
+                       shelf--;
+                       number+=(Storage::max_number - 1);
+                   } else number--;
+                } 
+                else if (shelf == 0)
+                {
+                    section--;
+                    shelf+=(Storage::max_shelf -1);
+                } else shelf--; //tva trqq li mi hm mai ne
+            } 
+            else if (section == 0) //tuka drugite trqbvat li mi
+            {
+                if (shelf == 0 && number == 0)
+                {
+                    cout<<"No place";
+                } 
+                else
+                {
+                    if (shelf != 0)
                     {
-                        //ako sme na 25 section 1 shelf 1 number
-                        //otivamena 24 stilaj 299 shelf 199 number
-                        //no tuk mai bi trqbvalo da se poqvi problem
-                        //s tova kolko slots zaema nashiq produkt
-                        
-                    }
+                        if (number == 0)
+                        {
+                            shelf--;
+                            number+=(Storage::max_number - 1);
+                        } else number--;
+                    } else number--;   
                 }
-            }
-            return *this;
+                
+            } 
+
+
+            return address;
+
         }
