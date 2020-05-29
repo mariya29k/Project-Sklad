@@ -13,12 +13,13 @@ Storage storage;
 
 void Open ()
 {//ofstream???
+    
     ifstream StorageFile;
     //first we check whether the file is already opened
     if(StorageFile.is_open())
     {
         cout<<"File is already opened! ";
-    } else StorageFile.open("input.txt"); //("", ios::app/ios::out)?
+    } else StorageFile.open("fail.txt", ios::in); //("", ios::app/ios::out)?
 
     //then we check for errors
     if (StorageFile.fail())
@@ -27,12 +28,43 @@ void Open ()
         exit(1); //we close the program exit(0) - successfully executed, exit(1) - closed because of fail
     }
 
-    // int x,y;
-    // StorageFile>>x>>y;
-    // cout<<"num1 : "<< x<< "num 2: "<<y;
+    
 }
 
 //void Close () - moje bi prosto shte go sloja v if-a s komandite?
+bool isEmpty(ifstream &file)
+{
+
+}
+
+void SaveAs ()
+{
+    ofstream NewStorageFile;
+    
+    if (NewStorageFile.is_open())
+    {
+        cout << "File is already opened!"<<endl;
+        cout << "Do you want to overwrite it? Y/N"<<endl;
+        char answer;
+        cin>>answer;
+        if (answer == 'y' || answer == 'Y')
+        {
+            NewStorageFile.open("newfile.txt", ios::trunc);
+        } else  NewStorageFile.close(); //maybe cout "File is closed, choose another function"
+    } else  NewStorageFile.open("newfile.txt", ios::out);
+
+    if(NewStorageFile.fail())
+    {
+        cout<<"Error opening file! ";
+        exit(1);
+    }
+    
+    NewStorageFile << storage;
+//PONEJE ARRAY E FULL OF EMPTY PRODUCTS MI EBE MAIKATA NA TEKSTOVIQ FAIL FIKS IT
+//FIKS IS VALID i sushto cout na tva neshto tam na date.cpp
+    NewStorageFile.close();
+
+}
 
 
 

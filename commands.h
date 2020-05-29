@@ -4,6 +4,7 @@
 using namespace std;
 
 void Open();
+void SaveAs();
 void help();
 void add();
 void print();
