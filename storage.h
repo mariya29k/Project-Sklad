@@ -10,9 +10,9 @@ using namespace std;
 class Storage
 {
     public:
-    static const int max_section = 26;
-    static const int max_shelf = 200;
-    static const int max_number = 300;
+    static const int max_section = 5;
+    static const int max_shelf = 10;
+    static const int max_number = 10;
     static const int slot_size = 10;
 
     private:
