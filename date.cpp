@@ -7,8 +7,8 @@ using namespace std;
     Date::Date ()
     {
         year = -1;
-        month = -1;
-        day = -1;
+        month = 1;
+        day = 1;
     }
 
     Date::Date (int GivenYear, int GivenMonth, int GivenDay)
@@ -90,7 +90,14 @@ using namespace std;
 
     bool Date::isValid () const //checks whether the entered date is valid
     {   
-        if (year < 0) return false;
+        if (year < 0)
+        {
+            if (year == -1) //tva zaradi default constructor tova mi se struva kato only variant za fiksvane na problema
+            {
+                return true;
+            }
+            return false;
+        }    
         if (month > 12 || month < 1) return false;
         if (day > 31 || day < 1) return false;
         if (day == 31 && (month == 4 || month == 6 || month == 9 || month == 11 || month == 2)) return false;
@@ -152,7 +159,7 @@ using namespace std;
 
     
     bool Date::operator < (const Date &other)
-    {   if (year < 0 || other.year < 0)
+    {   if (year <= 0 || other.year <= 0)
         {
             throw "Invalid comparison";
         }
@@ -198,7 +205,7 @@ using namespace std;
    ostream& operator << (ostream& output, const Date &date)
     {   if(date.isValid())
         {
-        output << date.year<<"-"<<date.month<<"-"<<date.day<<endl;
+        output << date.year<<"-"<<date.month<<"-"<<date.day;
         return output;
         } else cout<<"Invalid date!"<<endl;
     }
