@@ -18,6 +18,6 @@ class Address
     bool operator== (const Address &other);
     friend ostream& operator << (ostream& output, const Address &address);
     Address &operator= (const Address &other);
-    Address &operator-- ();
+    Address operator-- ();
   
 };

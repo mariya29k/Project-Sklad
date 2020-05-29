@@ -4,7 +4,7 @@
 #include "storage.h"
 using namespace std;
 
-//Storage has 26 sections, 200 shelves, 300 numbers - 1number can take up to 10kg/litres
+//Storage has 5 sections, 10 shelves, 10 numbers - 1number(slot) can take up to 10kg/litres
     Address::Address ()
     {
         section = 0;
@@ -51,7 +51,7 @@ using namespace std;
         return *this;
     }
 
-        Address& Address::operator --()
+        Address Address::operator --()
         { 
 
             Address address(section, shelf, number);
@@ -70,9 +70,9 @@ using namespace std;
                 {
                     section--;
                     shelf+=(Storage::max_shelf -1);
-                } else shelf--; //tva trqq li mi hm mai ne
+                } else shelf--;
             } 
-            else if (section == 0) //tuka drugite trqbvat li mi
+            else if (section == 0) 
             {
                 if (shelf == 0 && number == 0)
                 {

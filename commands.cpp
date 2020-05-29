@@ -19,7 +19,7 @@ void Open ()
     if(StorageFile.is_open())
     {
         cout<<"File is already opened! ";
-    } else StorageFile.open("fail.txt", ios::in); //("", ios::app/ios::out)?
+    } else StorageFile.open("storage.txt", ios::in); //("", ios::app/ios::out)?
 
     //then we check for errors
     if (StorageFile.fail())
@@ -31,9 +31,25 @@ void Open ()
     
 }
 
-//void Close () - moje bi prosto shte go sloja v if-a s komandite?
-bool isEmpty(ifstream &file)
+void Close()
 {
+    //StorageFile.close();
+}
+
+void Save ()
+{
+    ofstream StorageFile;
+    if (StorageFile.is_open())
+    {
+        StorageFile.open("storage.txt", ios::trunc);
+        StorageFile << storage;
+    } else StorageFile.open("storage.txt", ios::out);
+
+    if (StorageFile.fail())
+    {
+        cout<< "Error opening file! ";
+        exit(1);
+    } else StorageFile << storage;
 
 }
 
@@ -61,7 +77,6 @@ void SaveAs ()
     
     NewStorageFile << storage;
 //PONEJE ARRAY E FULL OF EMPTY PRODUCTS MI EBE MAIKATA NA TEKSTOVIQ FAIL FIKS IT
-//FIKS IS VALID i sushto cout na tva neshto tam na date.cpp
     NewStorageFile.close();
 
 }
