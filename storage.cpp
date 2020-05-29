@@ -31,11 +31,11 @@ void Storage::ShiftProducts (int index)
         array[max_size-1] = Product();
         return;
     }
+//operator--
 
     for (int i = index + 1; i < max_size ; ++i)
     {
         array[i-1] = array[i];
-       // array[i-1] = 
     }
 
     array[max_size -1] = Product();
