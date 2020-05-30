@@ -200,9 +200,32 @@ using namespace std;
     }
     //sort by date
 
-  
+    bool compare (const Date &date1, const Date &date2)
+    {
+        
+        if (date1.year <= 0 || date2.year <= 0)
+        {
+            throw "Invalid comparison";
+        }
+        if(date1.year < date2.year) return true;
+        else if (date1.year > date2.year) return false;
+        else
+        {
+            if (date1.month < date2.month) return true;
+            else if (date1.month > date2.month) return false;
+            else
+            {
+                if (date1.day < date2.day) return true;
+                else return false;
+            }
+        }
 
-   ostream& operator << (ostream& output, const Date &date)
+        return false;
+    
+    }
+
+
+    ostream& operator << (ostream& output, const Date &date)
     {   if(date.isValid())
         {
         output << date.year<<"-"<<date.month<<"-"<<date.day;
