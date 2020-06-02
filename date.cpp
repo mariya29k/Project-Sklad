@@ -200,7 +200,7 @@ using namespace std;
     }
     //sort by date
 
-    bool compare (const Date &date1, const Date &date2)
+    bool compareDate (const Date &date1, const Date &date2)
     {
         
         if (date1.year <= 0 || date2.year <= 0)
