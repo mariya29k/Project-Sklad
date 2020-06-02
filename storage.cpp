@@ -1,6 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
+#include <algorithm>
 #include "product.h"
 #include "date.h"
 #include "storage.h"
@@ -12,6 +11,7 @@ Storage::Storage()
     for (int i = 0; i < max_section * max_shelf * max_number; ++i)
     {
         array[i] = Product();
+        array[i].SetAddress(Address(max_section, max_shelf, max_number));
     }
 }
 
@@ -20,8 +20,12 @@ int Storage::GetIndex (int i, int j, int k) const
     return i * max_shelf * max_number + j * max_number + k; //tova ni vrushta adresa poneje shte ni e array 
 }
 
+Product Storage::GetStorage() const
+{
 
+}
 
+//problem in addProduct
 //shifts products to the left
 void Storage::ShiftProducts (int index)
 {
@@ -31,10 +35,11 @@ void Storage::ShiftProducts (int index)
         array[max_size-1] = Product();
         return;
     }
-//operator--
+
 
     for (int i = index + 1; i < max_size ; ++i)
     {
+        array[i].SetAddress(--array[i].GetAddress());
         array[i-1] = array[i];
     }
 
@@ -46,11 +51,11 @@ void Storage::ShiftProducts (int index)
 bool Storage::addProduct(Product &product)
 {
     for (int i = 0 ; i < max_section; ++i)
-    {
+    {   
         for ( int j = 0; j < max_shelf; ++j)
-        {
+        { 
             for (int k = 0; k < max_number; ++k)
-            {
+            {   
                 int index = GetIndex(i,j,k);
                 if (array[index] == Product())
                 {   
@@ -64,8 +69,7 @@ bool Storage::addProduct(Product &product)
                         return false;
                     }
 
-                    product.SetAddress(Address(i,j,k));
-
+                    product.SetAddress(Address(i,j,k)); //we give a product the address, nadpisvame
                     for (int slot = 0; slot < needed_slots; slot++)
                     {
                         //cout<<"kaji mi kolko davash "<< index+slot<<endl;
@@ -79,7 +83,8 @@ bool Storage::addProduct(Product &product)
         }
     }
 
-    cout <<"No place left! "<< endl;
+    //tozi cout izobshto trqbva li da bude tuk
+    cout <<"No place left! beeee "<< endl;
     return false;
 
 }
@@ -133,6 +138,7 @@ Product Storage::expired()
                 }
                 if (is_expired)
                 {
+                    cout<<"Deleted product! ";
                     return product;
                 } 
             }
@@ -167,6 +173,11 @@ void Storage::IncreaseAvailability (Product product)
       
 }
 
+//for log function 
+void SortByDate(Storage array[], int max_size)
+{
+    sort(array, array+max_size, compare);
+}
 
 ostream& operator << (ostream& output, const Storage &storage)
 {
