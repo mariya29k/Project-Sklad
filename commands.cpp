@@ -152,7 +152,15 @@ void remove()
 
 void log()
 {
+    Date from;
+    Date to;
+    cout<<"Enter date from which you want to see information: "<<endl;
+    cin>>from;
+    cout<<"Enter date up to which you want to see information: "<<endl;
+    cin>>to;
+    storage.SortByDate(storage, storage.max_size);
     
+
 }
 
 void clean()
