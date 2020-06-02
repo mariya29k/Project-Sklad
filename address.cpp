@@ -51,48 +51,48 @@ using namespace std;
         return *this;
     }
 
-        Address Address::operator --()
-        { 
+    Address Address::operator --()
+    { 
 
-            Address address(section, shelf, number);
+        Address address(section, shelf, number);
 
-            if (section !=0) 
+        if (section !=0) 
+        {
+            if (shelf != 0)
+            {
+                if (number == 0)
+                {
+                    shelf--;
+                    number+=(Storage::max_number - 1);
+                } else number--;
+            } 
+            else if (shelf == 0)
+            {
+                section--;
+                shelf+=(Storage::max_shelf -1);
+            } else shelf--;
+        } 
+        else if (section == 0) 
+        {
+            if (shelf == 0 && number == 0)
+            {
+                cout<<"No place ";
+            } 
+            else
             {
                 if (shelf != 0)
                 {
-                   if (number == 0)
-                   {
-                       shelf--;
-                       number+=(Storage::max_number - 1);
-                   } else number--;
-                } 
-                else if (shelf == 0)
-                {
-                    section--;
-                    shelf+=(Storage::max_shelf -1);
-                } else shelf--;
-            } 
-            else if (section == 0) 
-            {
-                if (shelf == 0 && number == 0)
-                {
-                    cout<<"No place";
-                } 
-                else
-                {
-                    if (shelf != 0)
+                    if (number == 0)
                     {
-                        if (number == 0)
-                        {
-                            shelf--;
-                            number+=(Storage::max_number - 1);
-                        } else number--;
-                    } else number--;   
-                }
-                
-            } 
+                        shelf--;
+                        number+=(Storage::max_number - 1);
+                    } else number--;
+                } else number--;   
+            }
+            
+        } 
 
 
-            return address;
+        return address;
 
-        }
+    }
