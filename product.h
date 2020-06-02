@@ -44,5 +44,7 @@ class Product
     void SetAddress (Address address);
     Address GetAddress () const;
     bool operator== (const Product &product);
+    bool operator< (const Product &product);
     friend ostream& operator << (ostream& out, const Product &product);
 };
+    bool compare (const Product &p1, const Product &p2);

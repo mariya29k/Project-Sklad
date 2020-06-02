@@ -137,6 +137,17 @@ using namespace std;
                 && weight == other.weight && availability == other.availability && address == other.address && comment == other.comment;
     }
 
+
+    bool Product::operator< (const Product &other)
+    {
+        if (expiration_date < other.expiration_date)
+        {
+            return true;
+        } else return false;
+    }
+
+
+
     void Product::SetAddress (Address address)
     {
         this->address = address;
@@ -161,3 +172,8 @@ using namespace std;
         return out;
     }
 
+//so i can easily sort my array by the date products came in storage
+    bool compare (const Product &p1, const Product &p2)
+    {
+        compareDate(p1.GetinStorage(), p2.GetinStorage());
+    }
