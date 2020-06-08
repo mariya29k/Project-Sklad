@@ -6,6 +6,7 @@ using namespace std;
 
 int main ()
 {
+
     int number;
     help();
     
@@ -30,8 +31,7 @@ int main ()
                 help();
                 break;
             case 6:
-                cout << "Bye!";
-                exit(0);
+                exit();
                 break;
             case 7:
                 print();

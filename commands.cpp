@@ -36,6 +36,8 @@ void Close()
     //StorageFile.close();
 }
 
+bool is_saved = false;
+
 void Save ()
 {
     ofstream StorageFile;
@@ -49,7 +51,14 @@ void Save ()
     {
         cout<< "Error opening file! ";
         exit(1);
-    } else StorageFile << storage;
+    } 
+    else
+    {
+        StorageFile << storage;
+        cout<<"Info is safed! "<<endl;
+        is_saved = true;
+    }
+        
 
 }
 
@@ -75,7 +84,9 @@ void SaveAs ()
         exit(1);
     }
     
+    is_saved = true;
     NewStorageFile << storage;
+    cout<<"Info is saved in new file! "<<endl;
 //PONEJE ARRAY E FULL OF EMPTY PRODUCTS MI EBE MAIKATA NA TEKSTOVIQ FAIL FIKS IT
     NewStorageFile.close();
 
@@ -98,6 +109,29 @@ void help ()
          <<"| 10. log <from> <to>       shares all changes made to a certain product   |\n"
          <<"| 11. clean                 removes all soon-to-be expired products        |\n";
     cout <<"---------------------------------------------------------------------------\n";
+}
+
+void exit()
+{
+    if(is_saved == 0)
+    {
+        cout<<"File isn't saved! Do you want to save it? Y/N"<<endl;
+        char answer;
+        cin>>answer;
+        if(answer == 'Y' || answer == 'y')
+        {
+            Save();
+            cout<<"File is saved!"<<endl;
+            cout<<"Bye! "<<endl;
+            exit(0);
+        } else exit(0);
+    } else exit(0);
+}
+
+
+void print()
+{
+    cout<<storage;
 }
 
 void add ()
@@ -131,10 +165,6 @@ void add ()
 }
 
 
-void print()
-{
-    cout<<storage;
-}
 
 
 void remove()

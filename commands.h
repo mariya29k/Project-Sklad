@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 
@@ -12,6 +13,7 @@ void print();
 void remove();
 void log();
 void clean();
+void exit();
 
 
 
