@@ -135,7 +135,7 @@ using namespace std;
 //this function returns us today's date so we can check the expiration date of a product
     Date Date::today_date()
     {
-        time_t t = time(NULL);
+        time_t t = time(0);
         tm* timePtr = localtime(&t);
         day=timePtr->tm_mday;
         month=timePtr->tm_mon+1;
@@ -146,6 +146,13 @@ using namespace std;
 //we need operators so that we can check for example the experation date
 //fixed operators so they take only 1 argument, not 2 as the earlier version
     bool Date::operator == (const Date &other)
+    {
+
+        return year == other.year && month == other.month && day == other.day;
+
+    }
+
+    bool Date::operator == (const Date &other) const
     {
 
         return year == other.year && month == other.month && day == other.day;
@@ -233,7 +240,7 @@ using namespace std;
         } else cout<<"Invalid date!"<<endl;
     }
 
-    istream& operator >> (istream& input, Date &date)
+    istream& operator >> (istream& input, Date &date) //sloji validaciq
     {
        
         input >> date.year >> date.month >> date.day;

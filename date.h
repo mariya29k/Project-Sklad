@@ -33,6 +33,7 @@ class Date
     friend ostream& operator << (ostream& output, const Date &date);
     friend istream& operator >> (istream& input, Date &date);
     bool operator == (const Date &other);
+    bool operator == (const Date &other) const;
     bool operator != (const Date &other);
     bool operator < (const Date &other);
     bool operator > (const Date &other);
