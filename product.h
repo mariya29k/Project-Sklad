@@ -17,9 +17,7 @@ class Product
     int availability;
     Address address;
     string comment;
-    
-    //int id;
-    //static int product_id;
+
 
     public:
     
@@ -43,7 +41,9 @@ class Product
     int GetID () const;
     void SetAddress (Address address);
     Address GetAddress () const;
-    bool operator== (const Product &product);
+    bool compareProduct(const Product &product);
+    bool operator== (const Product &product) const;
+    bool operator!=(const Product &other) const; //if there is no const gives me errors pls send help
     bool operator< (const Product &product);
     friend ostream& operator << (ostream& out, const Product &product);
 };
