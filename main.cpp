@@ -43,7 +43,7 @@ int main ()
                 remove();
                 break;
             case 10:
-                log();
+               // log();
                 break;
             case 11:
                 clean();
