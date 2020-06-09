@@ -23,6 +23,7 @@ int main ()
             case 2:
                 break;
             case 3:
+                Save();
                 break;
             case 4:
                 SaveAs();
@@ -31,6 +32,7 @@ int main ()
                 help();
                 break;
             case 6:
+            cout<<"Bye! ";
                 exit();
                 break;
             case 7:

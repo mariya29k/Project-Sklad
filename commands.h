@@ -6,6 +6,7 @@ using namespace std;
 
 
 void Open();
+void Save();
 void SaveAs();
 void help();
 void add();

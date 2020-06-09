@@ -44,8 +44,6 @@ void Save ()
     if (StorageFile.is_open())
     {
         StorageFile.open("storage.txt", ios::trunc);
-        StorageFile << storage;
-        is_saved = true;
     } else StorageFile.open("storage.txt", ios::out);
 
     if (StorageFile.fail())
@@ -136,8 +134,8 @@ void print()
 }
 
 void add ()
-{   //ako si pravq produkta kato vektor s push_back shte stane
-    string name; //ili * ili []
+{  
+    string name;
     Date expiration;
     Date in_storage;
     string manufacturer;
@@ -145,14 +143,20 @@ void add ()
     string comment;
 
     cout<<"You are adding a new product to storage! "<<endl;
-    cout<<"Add the name of the product: "<<endl; //no space people!!
-    cin>>name;
+    cout<<"Add the name of the product: "<<endl;
+    cin.get();
+    getline(cin,name);
     cout<<"\n Enter the expiration date of the product: "<<endl;
-    cin>>expiration;
+    do{
+        cin>>expiration;
+    } while (!(expiration.isValid()));
     cout<<"\n Enter the date when the product came in: "<<endl;
-    cin>>in_storage;
-    cout<<"\n Enter the name of the manufacturer: "<<endl; //sloji da ne slagat space
-    cin>>manufacturer;
+    do{
+        cin>>in_storage;
+    } while (!(in_storage.isValid()));
+    cout<<"\n Enter the name of the manufacturer: "<<endl;
+    cin.get();
+    getline(cin,manufacturer);
     cout<<"\n Enter weight: "<<endl;
     cin>>weight;
     cout<<"\n Enter a comment about the product: "<<endl;
@@ -161,6 +165,7 @@ void add ()
     cout<<endl;
 
     Product current = Product(name, expiration, in_storage, manufacturer, weight, comment);
+    //storage.IncreaseAvailability(current);
     storage.addProduct(current);
     cout<<current<<endl;
 }
@@ -196,16 +201,20 @@ void remove()
 
 void clean()
 {
-    Product removed;
-    cout<<"Expired products! "<<endl;
-    while (true)
+    // Product removed;
+    // cout<<"Expired products! "<<endl;
+    // while (true)
+    // {
+    //     removed = storage.expired();
+    //     if (removed == Product())
+    //     {
+    //         break;
+    //     } else cout<<removed<<endl;
+    // } 
+    while(true)
     {
-        removed = storage.expired();
-        if (removed == Product())
-        {
-            break;
-        } else cout<<removed<<endl;
-    } 
+    cout<<storage.expired();
+    }
 }
 
   
