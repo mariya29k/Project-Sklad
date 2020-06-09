@@ -14,7 +14,7 @@ class Product
     Date in_storage;
     string manufacturer;
     double weight;
-    int availability;
+    int quantity;
     Address address;
     string comment;
 
@@ -34,8 +34,8 @@ class Product
     void SetManufacturer (string manufacturer_);
     double GetWeight () const;
     void SetWeight (double weight_);
-    int GetAvailability () const;
-    void SetAvailability (int availability_);
+    int GetQuantity () const;
+    void SetQuantity (int quantity_);
     string GetComment() const;
     void SetComment(string comment_);
     int GetID () const;

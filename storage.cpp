@@ -92,6 +92,14 @@ bool Storage::addProduct(Product &product)
 
                     }
 
+                    // int quantity = 0;
+                    // while (array[index].GetName() == product.GetName())
+                    // {
+                    //     quantity += array[index].GetQuantity();
+                    // }
+                    // product.SetQuantity(quantity);
+                    // cout<<product.GetQuantity();
+
                     return true;
                 }
             }
@@ -154,6 +162,7 @@ Product Storage::expired()
                 if (is_expired)
                 {
                     cout<<"Deleted product! "<<endl;
+                   // cout<<product;
                     return product;
             
                 } 
@@ -164,29 +173,6 @@ Product Storage::expired()
 }
 
 //clean vrushta samo 1viq produkt s iztekul srok i ne produljava s drugite
-//sq kolichestvo, partidi tuka se oburkah jestoko
-void Storage::IncreaseAvailability (Product product)
-{
-    for (int i = 0 ; i < max_section; ++i)
-    {
-        for ( int j = 0; j < max_shelf; ++j)
-        {
-            for (int k = 0; k < max_number; ++k)
-            {
-                int index = GetIndex(i,j,k);
-                Product product = array[index];
-                int quantity = 1;
-                while (array[index].GetName() == product.GetName())
-                {
-                    quantity++;
-                }
-                product.SetAvailability(quantity);
-                cout<<product.GetAvailability();
-            }
-        }
-    }
-      
-}
 
 //for log function 
 void Storage::SortByDate(Product storage[], int max_size)
@@ -204,11 +190,10 @@ ostream& operator << (ostream& output, const Storage &storage)
             {   
                 
                 int index = storage.GetIndex(i,j,k);
-                if(storage.array[index] != Product()) //shtoto ne iskam da mi cout-va praznite produkti ama neshto ne se poluchava
+                if(!(storage.array[index] == storage.product)) //shtoto ne iskam da mi cout-va praznite produkti ama neshto ne se poluchava
                 {
-                    cout<<"tuk sum"<<endl;
                     output<<storage.array[index]<<endl;
-                } else cout<<"tup operator";
+                }
             }
         }
     }
@@ -216,3 +201,26 @@ ostream& operator << (ostream& output, const Storage &storage)
 }
 
     
+// //sq kolichestvo, partidi tuka se oburkah jestoko
+// void Storage::IncreaseAvailability (Product product)
+// {
+//     for (int i = 0 ; i < max_section; ++i)
+//     {
+//         for ( int j = 0; j < max_shelf; ++j)
+//         {
+//             for (int k = 0; k < max_number; ++k)
+//             {
+//                 int index = GetIndex(i,j,k);
+//                 Product product = array[index];
+//                 int quantity = 0;
+//                 while (array[index].GetName() == product.GetName())
+//                 {
+//                     quantity += array[index].GetQuantity();
+//                 }
+//                 product.SetQuantity(quantity);
+//                 cout<<product.GetQuantity();
+//             }
+//         }
+//     }
+      
+// }

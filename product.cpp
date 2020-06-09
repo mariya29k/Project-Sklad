@@ -14,7 +14,7 @@ Product::Product ()
     this->in_storage = Date();
     SetManufacturer("default");
     this->weight = 0.0;
-    this->availability = 0;
+    this->quantity = 0;
     this->address = Address();
     SetComment("default");
     
@@ -29,7 +29,7 @@ Product::Product (const Product &other)
     in_storage = other.in_storage;
     SetManufacturer(other.manufacturer);
     weight = other.weight;
-    availability = other.availability;
+    quantity = other.quantity;
     address = other.address;
     comment = other.comment;
  
@@ -37,16 +37,15 @@ Product::Product (const Product &other)
 
 Product:: Product (string name_, Date expiration_, Date inStorage_, string manufacturer_, double weight_, string comment_)
 {
-    SetName(name_);
-    SetExpiration(expiration_);
-    SetinStorage(inStorage_);
-    SetManufacturer(manufacturer_);
-    SetWeight(weight_);
-    availability = 1;
-    SetComment(comment_);
-    address = Address();
-    
-
+    this->name=name_;
+    this->expiration_date=expiration_;
+    this->in_storage=inStorage_;
+    this->manufacturer=manufacturer_;
+    this->weight=weight_;
+    this->comment = comment_;
+    this->quantity = 1;
+    this->address = Address();
+   
 }
 
 string Product::GetName () const
@@ -107,16 +106,16 @@ void Product::SetWeight (double weight_)
     } else cout<< "weight must be positive";
 }
 
-int Product::GetAvailability () const
+int Product::GetQuantity () const
 {
-    return this->availability;
+    return this->quantity;
 }
 
-void Product::SetAvailability (int availability_)
+void Product::SetQuantity (int quantity_)
 {
-    if(availability_>0)
+    if(quantity_>0)
     {
-        availability = availability_;
+        quantity = quantity_;
     } else cout<<"Quantity must be a positive number! "<<endl;
 }
 
@@ -138,7 +137,7 @@ bool Product::compareProduct(const Product &product)
 bool Product::operator== (const Product &other) const
 {
     return name == other.name && expiration_date == other.expiration_date && in_storage == other.in_storage && manufacturer == other.manufacturer 
-            && weight == other.weight && availability == other.availability && address == other.address && comment == other.comment;
+            && weight == other.weight && quantity == other.quantity && address == other.address && comment == other.comment;
 }
 
 bool Product::operator!=(const Product &other) const
@@ -176,7 +175,7 @@ ostream& operator << (ostream& out, const Product &product)
         out<<"Came in storage: "<<product.GetinStorage()<<endl;
         out<<"Manufacturer: "<<product.GetManufacturer()<<endl;
         out<<"Weight: "<<product.GetWeight()<<endl;
-        out<<"Availability: "<<product.GetAvailability()<<endl;
+        out<<"Availability: "<<product.GetQuantity()<<endl;
         out<<"Address: "<<product.GetAddress()<<endl;
         out<<"Comment: "<<product.GetComment()<<endl;
     }
