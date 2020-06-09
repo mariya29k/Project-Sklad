@@ -105,7 +105,7 @@ using namespace std;
 
     }
 
-    Address Address::operator --()
+    Address Address::operator++()
     {
         Address address(section, shelf, number);
 
