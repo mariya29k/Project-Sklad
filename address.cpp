@@ -6,10 +6,10 @@ using namespace std;
 
 //Storage has 5 sections, 10 shelves, 10 numbers - 1number(slot) can take up to 10kg/litres
     Address::Address ()
-    {
-        section = 0;
-        shelf = 0;
-        number = 0;
+    {   //by default my products should be on address -1 -1 -1 because it gives me an error with shift products
+        section = -1;
+        shelf = -1;
+        number = -1;
     }
 
     Address::Address (int section, int shelf, int number)
@@ -27,14 +27,22 @@ using namespace std;
     }
 
 
-    bool Address::operator== (const Address &other)
+    bool Address::operator== (const Address &other) const
     {
         return section == other.section && shelf == other.shelf && number == other.number;
     }
 
+    bool Address::operator!= (const Address &other) const
+    {
+        return !(this == &other);
+    }
+
     ostream& operator << (ostream& output, const Address &address)
     {   
-        output << address.section << "-" << address.shelf << "-" << address.number;
+        if(address != Address())
+        {
+            output << address.section << "-" << address.shelf << "-" << address.number;
+        }
         return output;
        
     }
@@ -76,7 +84,7 @@ using namespace std;
         {
             if (shelf == 0 && number == 0)
             {
-                cout<<"No place ";
+                cout<<"No place123 ";
             } 
             else
             {
@@ -95,4 +103,48 @@ using namespace std;
 
         return address;
 
+    }
+
+    Address Address::operator --()
+    {
+        Address address(section, shelf, number);
+
+        if (section < Storage::max_section) 
+        {
+            if (shelf < Storage::max_shelf)
+            {
+                if (number == Storage::max_number)
+                {
+                    shelf++;
+                    number-=(Storage::max_number - 1);
+                } else number++;
+            } 
+            else if (shelf == Storage::max_shelf)
+            {
+                section++;
+                shelf-=(Storage::max_shelf -1);
+            } else shelf++;
+        } 
+        else if (section == Storage::max_section) 
+        {
+            if (shelf == Storage::max_shelf && number == Storage::max_number)
+            {
+                cout<<"No place! ";
+            } 
+            else
+            {
+                if (shelf != Storage::max_shelf)
+                {
+                    if (number == Storage::max_number)
+                    {
+                        shelf++;
+                        number-=(Storage::max_number - 1);
+                    } else number++;
+                } else number++;   
+            }
+            
+        } 
+
+
+        return address;
     }
