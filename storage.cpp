@@ -11,7 +11,7 @@ Storage::Storage()
     for (int i = 0; i < max_section * max_shelf * max_number; ++i)
     {
         array[i] = Product();
-        array[i].SetAddress(Address(max_section, max_shelf, max_number));
+        array[i].SetAddress(Address());
     }
 }
 
@@ -20,16 +20,11 @@ int Storage::GetIndex (int i, int j, int k) const
     return i * max_shelf * max_number + j * max_number + k; //tova ni vrushta adresa poneje shte ni e array 
 }
 
-Product Storage::GetStorage() const
-{
-
-}
 
 //problem in addProduct
 //shifts products to the left
 void Storage::ShiftProducts (int index)
 {
-    int max_size =  max_section * max_shelf * max_number;
     if (index == max_size - 1)
     {
         array[max_size-1] = Product();
@@ -46,8 +41,28 @@ void Storage::ShiftProducts (int index)
     array[max_size -1] = Product();
 }
 
+void Storage::ShiftProductsRight(int index)
+{
+    if(index == max_size - 1)
+    {
+        cout<<"No more place in storage! "<<endl;
+        // array[max_size-1] = Product();
+        // return;
+    }
 
-//this function adds a product to a given address
+    Product temp;
+    for (int i = index + 1; i < max_size-1; ++i)    
+    {
+        array[i].SetAddress(++array[i].GetAddress());
+        temp = array[max_size-1];
+        array[max_size-1] = array[i];
+        array[i] = temp;
+    }
+    
+}
+
+
+//this function adds a product to a free address
 bool Storage::addProduct(Product &product)
 {
     for (int i = 0 ; i < max_section; ++i)
@@ -65,7 +80,7 @@ bool Storage::addProduct(Product &product)
 
                     if ((index + needed_slots) >= (max_section * max_shelf * max_number))
                     {
-                        cout <<"No place left! "<< endl;
+                        cout <<"No place left!"<< endl;
                         return false;
                     }
 
@@ -84,7 +99,7 @@ bool Storage::addProduct(Product &product)
     }
 
     //tozi cout izobshto trqbva li da bude tuk
-    cout <<"No place left! beeee "<< endl;
+    cout <<"No place left! "<< endl;
     return false;
 
 }
@@ -127,23 +142,23 @@ Product Storage::expired()
                 Date today;
                 today.today_date();
                 int index = GetIndex(i,j,k);
-                Product product = array[index];
                 bool is_expired = false;
+                Product product = array[index];
 
                 if (array[index].GetExpiration().GetYear() < 0 ) continue;
-                while (array[index].GetExpiration() < today) //not sure if <= is suitable 
+                if (array[index].GetExpiration() < today) //works ok but still cout all slots of one expired product
                 {                    
                     ShiftProducts(index);
                     is_expired = true;
                 }
                 if (is_expired)
                 {
-                    cout<<"Deleted product! ";
+                    cout<<"Deleted product! "<<endl;
                     return product;
+            
                 } 
             }
         }
-
     }
     return Product();        
 }
@@ -174,9 +189,9 @@ void Storage::IncreaseAvailability (Product product)
 }
 
 //for log function 
-void SortByDate(Storage array[], int max_size)
+void Storage::SortByDate(Product storage[], int max_size)
 {
-    sort(array, array+max_size, compare);
+    sort(storage, storage+max_size, compare);
 }
 
 ostream& operator << (ostream& output, const Storage &storage)
@@ -186,9 +201,14 @@ ostream& operator << (ostream& output, const Storage &storage)
         for ( int j = 0; j < storage.max_shelf; ++j)
         {
             for (int k = 0; k < storage.max_number; ++k)
-            {
+            {   
+                
                 int index = storage.GetIndex(i,j,k);
-                output<<storage.array[index]<<endl;
+                if(storage.array[index] != Product()) //shtoto ne iskam da mi cout-va praznite produkti ama neshto ne se poluchava
+                {
+                    cout<<"tuk sum"<<endl;
+                    output<<storage.array[index]<<endl;
+                } else cout<<"tup operator";
             }
         }
     }

@@ -18,13 +18,11 @@ class Storage
 
     private:
     int GetIndex (int i, int j, int k) const;
-
-
-   // vector<Product> products;
     Date today;
     Product array [max_section * max_shelf * max_number];
 
     void ShiftProducts (int index);
+    void ShiftProductsRight(int index);
 
     public:
 
@@ -34,7 +32,7 @@ class Storage
     Product removeProduct(string name, double weight);
     Product expired ();
     void IncreaseAvailability(Product product);
-    void SortByDate(Storage array, int max_size);
+	void SortByDate(Product storage[], int max_size);
     
     friend ostream& operator << (ostream& output, const Storage &storage);
 
