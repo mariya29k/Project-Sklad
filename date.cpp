@@ -145,12 +145,6 @@ using namespace std;
 
 //we need operators so that we can check for example the experation date
 //fixed operators so they take only 1 argument, not 2 as the earlier version
-    bool Date::operator == (const Date &other)
-    {
-
-        return year == other.year && month == other.month && day == other.day;
-
-    }
 
     bool Date::operator == (const Date &other) const
     {
@@ -159,13 +153,13 @@ using namespace std;
 
     }
     
-    bool Date::operator != (const Date &other)
+    bool Date::operator != (const Date &other) const
     {
         return !(this == &other);
     }
 
     
-    bool Date::operator < (const Date &other)
+    bool Date::operator < (const Date &other) const
     {   if (year <= 0 || other.year <= 0)
         {
             throw "Invalid comparison";
@@ -186,7 +180,7 @@ using namespace std;
         return false;
     }
 
-    bool Date::operator > (const Date &other)
+    bool Date::operator > (const Date &other) const
     {
         if (this == &other) return false;
         if (this < &other)  return false;
@@ -194,13 +188,13 @@ using namespace std;
 
     }
 
-    bool Date::operator >= (const Date &other)
+    bool Date::operator >= (const Date &other) const
     {
         if (this== &other) return true;
         return this > &other;
     }
 
-    bool Date::operator <= (const Date &other)
+    bool Date::operator <= (const Date &other) const
     {
         if (this == &other) return true;
         return this < &other;

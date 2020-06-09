@@ -32,13 +32,12 @@ class Date
     friend bool compareDate (const Date &date1, const Date &date2);
     friend ostream& operator << (ostream& output, const Date &date);
     friend istream& operator >> (istream& input, Date &date);
-    bool operator == (const Date &other);
     bool operator == (const Date &other) const;
-    bool operator != (const Date &other);
-    bool operator < (const Date &other);
-    bool operator > (const Date &other);
-    bool operator >= (const Date &other);
-    bool operator <= (const Date &other);
+    bool operator != (const Date &other) const;
+    bool operator < (const Date &other) const;
+    bool operator > (const Date &other) const;
+    bool operator >= (const Date &other) const;
+    bool operator <= (const Date &other) const;
 };
    
    
