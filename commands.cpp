@@ -88,7 +88,7 @@ void SaveAs ()
         if (answer == 'y' || answer == 'Y')
         {
             NewStorageFile.open("newfile.txt", ios::trunc);
-        } else  NewStorageFile.close(); //maybe cout "File is closed, choose another function"
+        } else  NewStorageFile.close();
     } else  NewStorageFile.open("newfile.txt", ios::out);
 
     if(NewStorageFile.fail())
@@ -100,7 +100,6 @@ void SaveAs ()
     is_saved = true;
     NewStorageFile << storage;
     cout<<"Info is saved in new file! "<<endl;
-//PONEJE ARRAY E FULL OF EMPTY PRODUCTS MI EBE MAIKATA NA TEKSTOVIQ FAIL FIKS IT
     NewStorageFile.close();
 
 }
@@ -181,7 +180,6 @@ void add ()
     cout<<endl;
 
     Product current = Product(name, expiration, in_storage, manufacturer, weight, comment);
-    //storage.IncreaseAvailability(current);
     storage.addProduct(current);
     cout<<current<<endl;
 }
@@ -190,7 +188,7 @@ void add ()
 
 
 void remove()
-{//tuk trqbva da poluchava availability, a ne weight ppc
+{
     string name;
     int quantity;
     cout<<"You are removing a product from storage!"<<endl;
@@ -228,7 +226,7 @@ void clean()
     // } 
     while(true)
     {
-    cout<<storage.expired();
+        cout<<storage.expired();
     }
 }
 

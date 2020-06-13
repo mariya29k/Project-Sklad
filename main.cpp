@@ -12,7 +12,7 @@ int main ()
     
     while (true)
     {
-        cout << "Which number do u giv me?? "<<endl;
+        cout << "Choose an option from the menu.. "<<endl;
         cin >> number;
 
         switch (number)

@@ -21,7 +21,7 @@ class Storage
     Product product = Product();
 
     void ShiftProducts (int index);
-    void ShiftProductsRight(int index);
+    void ShiftProductsRight(int index, Product product);
 
     public:
 

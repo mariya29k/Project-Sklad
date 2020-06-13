@@ -17,7 +17,7 @@ Storage::Storage()
 
 int Storage::GetIndex (int i, int j, int k) const
 {
-    return i * max_shelf * max_number + j * max_number + k; //tova ni vrushta adresa poneje shte ni e array 
+    return i * max_shelf * max_number + j * max_number + k;  
 }
 
 int Storage::GetSlots() const
@@ -60,7 +60,7 @@ void Storage::ShiftProducts (int index)
     array[max_size -1] = Product();
 }
 
-void Storage::ShiftProductsRight(int index)
+void Storage::ShiftProductsRight(int index, Product product)
 {
     if(index == max_size - 1)
     {
@@ -69,13 +69,16 @@ void Storage::ShiftProductsRight(int index)
         return;
     }
 
-    Product temp;
-    temp = array[index];
+    int needed_slots = product.GetnSlots(product);
     for(int i = max_size - 1; i > index; --i)
     {
         array[i] = array[i-1];
+        array[i].SetAddress(++array[i].GetAddress());
     }
-    array[index] = Product();
+    for (int space = 0; space < needed_slots; ++space)
+    {
+        array[index+space]  = product;
+    }
     
 }
 
@@ -122,12 +125,8 @@ bool Storage::addProduct(Product &product)
                         }
                         else //ako v dqsno ot produkta ne ni e prazno shiftvame za da go zapishem
                         {
-                            ShiftProductsRight(index);
-                            product.SetAddress(Address(i,j,k));
-                            for (int space = 0; space < needed_slots; ++space)
-                            {
-                                array[index+space]  = product;
-                            }
+                            ShiftProductsRight(index+slots, product);
+                            product.SetAddress(Address(i,j,k)); //why safe the default address tho?
                             return true;
                         } 
                     }
@@ -142,14 +141,14 @@ bool Storage::addProduct(Product &product)
                             }
                             else
                             {
-                                product.SetAddress(Address(i,j,k));
                                 for (int space = 0; space < needed_slots; ++space)
                                 {
                                     array[index+space]  = product;
+                                    product.SetAddress(Address(i,j,k));
                                 }
                                 return true;
                             }
-                        }
+                        } else return false;
                     }
 
                     array[index].SetQuantity(array[index].GetQuantity()+1); //uvelichavame quantity ako sa edin i susht 
@@ -242,7 +241,8 @@ Product Storage::expired()
                 if (array[index].GetExpiration().GetYear() < 0 ) continue;
                 if (array[index].GetExpiration() < today)
                 {
-                    removeProduct(array[index].GetName(), array[index].GetQuantity());  
+                    return product;  
+                    removeProduct(array[index].GetName(), array[index].GetQuantity());
                 }
             }
         }
@@ -250,15 +250,13 @@ Product Storage::expired()
     return Product();        
 }
 
-//clean vrushta samo 1viq produkt s iztekul srok i ne produljava s drugite
+
 
 //for log function 
 void Storage::SortByDate(Storage storage) //sorts them by the date they came in storage
 {
     sort(storage.array, storage.array+max_size, compare);
 }
-
-
 
 
 ostream& operator << (ostream& output, const Storage &storage)
@@ -282,26 +280,3 @@ ostream& operator << (ostream& output, const Storage &storage)
 }
 
     
-// //sq kolichestvo, partidi tuka se oburkah jestoko
-// void Storage::IncreaseAvailability (Product product)
-// {
-//     for (int i = 0 ; i < max_section; ++i)
-//     {
-//         for ( int j = 0; j < max_shelf; ++j)
-//         {
-//             for (int k = 0; k < max_number; ++k)
-//             {
-//                 int index = GetIndex(i,j,k);
-//                 Product product = array[index];
-//                 int quantity = 0;
-//                 while (array[index].GetName() == product.GetName())
-//                 {
-//                     quantity += array[index].GetQuantity();
-//                 }
-//                 product.SetQuantity(quantity);
-//                 cout<<product.GetQuantity();
-//             }
-//         }
-//     }
-      
-// }

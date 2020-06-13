@@ -137,8 +137,10 @@ bool Product::compareProduct(const Product &product)
 
 bool Product::operator== (const Product &other) const
 {
-    return name == other.name && expiration_date == other.expiration_date && in_storage == other.in_storage && manufacturer == other.manufacturer 
-            && weight == other.weight && quantity == other.quantity && address == other.address && comment == other.comment;
+    return name == other.name && expiration_date == other.expiration_date 
+            && in_storage == other.in_storage && manufacturer == other.manufacturer 
+            && weight == other.weight && quantity == other.quantity 
+            && address == other.address && comment == other.comment;
 }
 
 bool Product::operator!=(const Product &other) const
