@@ -70,15 +70,20 @@ void Storage::ShiftProductsRight(int index)
     }
 
     Product temp;
-    for (int i = index + 1; i < max_size-1; ++i)    
+    temp = array[index];
+    for(int i = max_size - 1; i > index; --i)
     {
-        array[i].SetAddress(++array[i].GetAddress());
-        temp = array[max_size-1];
-        array[max_size-1] = array[i];
-        array[i] = temp;
+        array[i] = array[i-1];
     }
+    array[index] = Product();
     
 }
+
+/*
+    1 2 3 4 5
+      ^
+    1 6 2 3 4 5
+*/
 
 
 //this function adds a product to a free address
@@ -117,7 +122,7 @@ bool Storage::addProduct(Product &product)
                         }
                         else //ako v dqsno ot produkta ne ni e prazno shiftvame za da go zapishem
                         {
-                            ShiftProductsRight(index+needed_slots);
+                            ShiftProductsRight(index);
                             product.SetAddress(Address(i,j,k));
                             for (int space = 0; space < needed_slots; ++space)
                             {
@@ -146,10 +151,12 @@ bool Storage::addProduct(Product &product)
                             }
                         }
                     }
+
+                    array[index].SetQuantity(array[index].GetQuantity()+1); //uvelichavame quantity ako sa edin i susht 
                     return false;  
                 }
 
-                if(array[index] == Product())
+                else if(array[index] == Product())
                 {
                     if(index + needed_slots > max_size)
                     {
