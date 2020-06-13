@@ -21,6 +21,7 @@ int main ()
                 Open();
                 break;
             case 2:
+                Close();
                 break;
             case 3:
                 Save();
@@ -45,7 +46,7 @@ int main ()
                 remove();
                 break;
             case 10:
-               // log();
+                log();
                 break;
             case 11:
                 clean();

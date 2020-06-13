@@ -203,24 +203,22 @@ using namespace std;
 
     bool compareDate (const Date &date1, const Date &date2)
     {
-        
-        if (date1.year <= 0 || date2.year <= 0)
+        Date date3 = Date();
+        while(&date1 != &date3 || &date2 != &date3)
         {
-            throw "Invalid comparison";
-        }
-        if(date1.year < date2.year) return true;
-        else if (date1.year > date2.year) return false;
-        else
-        {
-            if (date1.month < date2.month) return true;
-            else if (date1.month > date2.month) return false;
+            if(date1.year < date2.year) return true;
+            else if (date1.year > date2.year) return false;
             else
             {
-                if (date1.day < date2.day) return true;
-                else return false;
+                if (date1.month < date2.month) return true;
+                else if (date1.month > date2.month) return false;
+                else
+                {
+                    if (date1.day < date2.day) return true;
+                    else return false;
+                }
             }
         }
-
         return false;
     
     }
@@ -241,6 +239,8 @@ using namespace std;
 
         return input;
     }
+
+
 
 
 

@@ -9,38 +9,53 @@
 using namespace std;
 
 Storage storage;
+ofstream StorageFile;
+ofstream NewStorageFile;
 
 
 void Open ()
-{//ofstream???
-    
-    ifstream StorageFile;
+{
     //first we check whether the file is already opened
     if(StorageFile.is_open())
     {
-        cout<<"File is already opened! ";
-    } else StorageFile.open("storage.txt", ios::in); //("", ios::app/ios::out)?
-
+        cout<<"File is already opened! "<<endl;
+    } 
+    else 
+    {   
+        cout<<"File is now opened! "<<endl;
+        StorageFile.open("storage.txt", ios::out);
+    }
+    
     //then we check for errors
     if (StorageFile.fail())
     {
-        cout<<"Error opening file! ";
+        cout<<"Error opening file! "<<endl;
         exit(1); //we close the program exit(0) - successfully executed, exit(1) - closed because of fail
     }
-
-    
+  
 }
 
 void Close()
 {
-    //StorageFile.close();
+    if(StorageFile.is_open())
+    { 
+        StorageFile.close();
+        cout<<"File is closed"<<endl;
+    }
+    else if(NewStorageFile.is_open())
+    {
+        NewStorageFile.close();
+        cout<<"File is closed"<<endl;
+    }
+    else cout<<"There are no opened files!"<<endl;
+
 }
 
 bool is_saved = false;
 
 void Save ()
 {
-    ofstream StorageFile;
+    
     if (StorageFile.is_open())
     {
         StorageFile.open("storage.txt", ios::trunc);
@@ -63,7 +78,6 @@ void Save ()
 
 void SaveAs ()
 {
-    ofstream NewStorageFile;
     
     if (NewStorageFile.is_open())
     {
@@ -141,6 +155,8 @@ void add ()
     string manufacturer;
     double weight;
     string comment;
+    Date today;
+    today.today_date();
 
     cout<<"You are adding a new product to storage! "<<endl;
     cout<<"Add the name of the product: "<<endl;
@@ -149,7 +165,7 @@ void add ()
     cout<<"\n Enter the expiration date of the product: "<<endl;
     do{
         cin>>expiration;
-    } while (!(expiration.isValid()));
+    } while ((!(expiration.isValid())) || expiration < today);
     cout<<"\n Enter the date when the product came in: "<<endl;
     do{
         cin>>in_storage;
@@ -176,28 +192,27 @@ void add ()
 void remove()
 {//tuk trqbva da poluchava availability, a ne weight ppc
     string name;
-    double weight;
-    //int quantity;
+    int quantity;
     cout<<"You are removing a product from storage!"<<endl;
     cout<<"Enter the name of the product you want removed: "<<endl;
     cin>>name;
     cout<<"Enter the quantity you want removed: "<<endl;
-    cin>>weight;
-    cout<<storage.removeProduct(name, weight);
+    cin>>quantity;
+    cout<<storage.removeProduct(name, quantity);
 }
 
-// void log()
-// {
-//     Date from;
-//     Date to;
-//     cout<<"Enter date from which you want to see information: "<<endl;
-//     cin>>from;
-//     cout<<"Enter date up to which you want to see information: "<<endl;
-//     cin>>to;
-//     storage.SortByDate(storage, storage.max_size);
-    
+void log()
+{
+    Date from;
+    Date to;
+    cout<<"Enter date from which you want to see information: "<<endl;
+    cin>>from;
+    cout<<"Enter date up to which you want to see information: "<<endl;
+    cin>>to;
+    storage.SortByDate(storage);
+    cout<<storage;
 
-// }
+}
 
 void clean()
 {

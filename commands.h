@@ -6,13 +6,14 @@ using namespace std;
 
 
 void Open();
+void Close();
 void Save();
 void SaveAs();
 void help();
 void add();
 void print();
 void remove();
-//void log();
+void log();
 void clean();
 void exit();
 
