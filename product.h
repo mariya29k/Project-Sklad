@@ -17,6 +17,7 @@ class Product
     int quantity;
     Address address;
     string comment;
+    static const int slot_size = 10;
 
 
     public:
@@ -41,6 +42,7 @@ class Product
     int GetID () const;
     void SetAddress (Address address);
     Address GetAddress () const;
+    int GetnSlots (const Product &product) const;
     bool compareProduct(const Product &product);
     bool operator== (const Product &product) const;
     bool operator!=(const Product &other) const; //if there is no const gives me errors pls send help

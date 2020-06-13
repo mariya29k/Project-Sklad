@@ -3,6 +3,7 @@
 #include "product.h"
 #include "address.h"
 #include <cstring>
+#include <cmath>
 
 using namespace std;
     
@@ -164,6 +165,13 @@ void Product::SetAddress (Address address)
 Address Product::GetAddress () const
 {
     return this->address;
+}
+
+int Product::GetnSlots(const Product &product) const
+{
+    double weight = product.GetWeight();
+    int needed_slots = ceil(weight / slot_size);
+    return needed_slots;
 }
 
 ostream& operator << (ostream& out, const Product &product)
