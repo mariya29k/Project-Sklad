@@ -8,7 +8,7 @@ using namespace std;
 
 Storage::Storage()
 {
-    for (int i = 0; i < max_section * max_shelf * max_number; ++i)
+    for (int i = 0; i <max_size; ++i)
     {
         array[i] = Product();
         array[i].SetAddress(Address());
@@ -19,6 +19,25 @@ int Storage::GetIndex (int i, int j, int k) const
 {
     return i * max_shelf * max_number + j * max_number + k; //tova ni vrushta adresa poneje shte ni e array 
 }
+
+int Storage::GetSlots() const
+{
+    for (int i = 0 ; i < max_section; ++i)
+    {   
+        for ( int j = 0; j < max_shelf; ++j)
+        { 
+            for (int k = 0; k < max_number; ++k)
+            {   
+                int index = GetIndex(i,j,k);
+                double weight = array[index].GetWeight();
+                int needed_slots = ceil(weight / slot_size); //2,6 go pravim na 3, za da izpolzvame enough space
+                //cout<<needed_slots<<endl;
+                return needed_slots;
+            }
+        } 
+    }   
+}
+
 
 
 //problem in addProduct
@@ -47,7 +66,7 @@ void Storage::ShiftProductsRight(int index)
     {
         cout<<"No more place in storage! "<<endl;
         // array[max_size-1] = Product();
-        // return;
+        return;
     }
 
     Product temp;
@@ -61,6 +80,120 @@ void Storage::ShiftProductsRight(int index)
     
 }
 
+
+// //this function adds a product to a free address
+// bool Storage::addProduct(Product &product)
+// {
+//     for (int i = 0 ; i < max_section; ++i)
+//     {   
+//         for ( int j = 0; j < max_shelf; ++j)
+//         { 
+//             for (int k = 0; k < max_number; ++k)
+//             {   
+//                 int index = GetIndex(i,j,k);
+//                 if (array[index].GetName() == product.GetName()) 
+//                 {
+//                     if (array[index].GetExpiration() == product.GetExpiration()) //if products have the same expiration date they should be on the same spot
+//                     {
+//                         addSame(product);
+//                     } 
+//                     else // if products have different expiration dates
+//                     {
+
+//                         add(product);
+//                     }
+//                 } else add(product);
+//             }
+//         }
+//     }
+
+//    // cout <<"No place left!"<< endl;
+//     return false;
+// }
+
+// //this function adds a product to a free address
+// bool Storage::add(Product &product)
+// {
+//     for (int i = 0 ; i < max_section; ++i)
+//     {   
+//         for ( int j = 0; j < max_shelf; ++j)
+//         { 
+//             for (int k = 0; k < max_number; ++k)
+//             {   
+//                 int index = GetIndex(i,j,k);
+//                 if (array[index] == Product())
+//                 {   
+//                     int needed_slots = product.GetnSlots(product);
+
+//                     if ((index + needed_slots) >= (max_section * max_shelf * max_number)) //this is needed so that we know if we have place
+//                     {
+//                        // cout <<"No place!!! left! "<< endl;
+//                         return false;
+//                     }
+
+//                     product.SetAddress(Address(i,j,k)); //we give a product the address, nadpisvame
+//                     for (int slot = 0; slot < needed_slots; slot++)
+//                     {
+//                         //cout<<"kaji mi kolko davash "<< index+slot<<endl;
+//                         array[index+slot]  = product; //sig sme che v dqsno ot produkta e prazno
+
+//                     }
+//                     return true;
+//                 }
+//             }
+//         }
+//     }
+
+//     //cout <<"No place left!"<< endl;
+//     return false;
+// }
+
+// bool Storage::addSame(Product &product)
+// {
+//      for (int i = 0 ; i < max_section; ++i)
+//     {   
+//         for ( int j = 0; j < max_shelf; ++j)
+//         { 
+//             for (int k = 0; k < max_number; ++k)
+//             {   
+//                 int index = GetIndex(i,j,k);
+//                 int needed_slots = product.GetnSlots(product);
+//                 if (array[index + GetSlots()] == Product()) //if there is space right from our product we add the new one
+//                         {   
+//                             if ((index + GetSlots() + needed_slots) >= (max_section * max_shelf * max_number))
+//                             {
+//                                // cout <<"No place left!"<< endl;
+//                                 return false;
+//                             }
+//                             else
+//                             {
+//                                 product.SetAddress(Address(i,j,k)); //we give a product the address, nadpisvame
+//                                 for (int slot = 0; slot < needed_slots; slot++)
+//                                 {
+//                                     //cout<<"how much space left: "<< index+slot<<endl;
+//                                     array[index+slot]  = product; //we are sure that there is space right from our product
+
+//                                 }
+//                             return true;
+//                             }
+//                         }
+//                         else //if there is a product where we want to put the new product we shift them
+//                         {
+//                             ShiftProductsRight(index + needed_slots);
+//                             product.SetAddress(Address(i,j,k)); //we give a product the address, nadpisvame
+//                             for (int slot = 0; slot < needed_slots; slot++)
+//                             {
+//                                 array[index+slot]  = product; //we are sure that there is space right from our product
+//                             }
+//                             return true;
+//                         }
+//             }
+//         }
+//     }
+
+//     //cout <<"No place left!"<< endl;
+//     return false;
+// }
 
 //this function adds a product to a free address
 bool Storage::addProduct(Product &product)
@@ -91,28 +224,18 @@ bool Storage::addProduct(Product &product)
                         array[index+slot]  = product; //sig sme che v dqsno ot produkta e prazno
 
                     }
-
-                    // int quantity = 0;
-                    // while (array[index].GetName() == product.GetName())
-                    // {
-                    //     quantity += array[index].GetQuantity();
-                    // }
-                    // product.SetQuantity(quantity);
-                    // cout<<product.GetQuantity();
-
                     return true;
                 }
             }
         }
     }
 
-    //tozi cout izobshto trqbva li da bude tuk
     cout <<"No place left! "<< endl;
     return false;
-
 }
 
-Product Storage::removeProduct(string name, double weight)
+
+Product Storage::removeProduct(string name, int quantity)
 {
     for (int i = 0 ; i < max_section; ++i)
     {
@@ -123,10 +246,26 @@ Product Storage::removeProduct(string name, double weight)
                 int index = GetIndex(i,j,k);
                 Product product = array[index];
                 bool removed = false;
-                while (array[index].GetName() == name && array[index].GetWeight() == weight) //shtoto produktite mi sa razhvurlqni
+                if (array[index].GetName() == name) //shtoto produktite mi sa razhvurlqni
                 {
-                    ShiftProducts(index);
-                    removed = true;
+                    
+                    if(array[index].GetQuantity() >= quantity)
+                    {
+                        ShiftProducts(index);
+                        removed = true;
+                    } 
+                    else
+                    {
+                        cout<<"Do you still want remove whatever is left?"<<endl;
+                        char answer;
+                        cin>>answer;
+                        if(answer == 'Y' || answer == 'y')
+                        {
+                            ShiftProducts(index);
+                            removed = true;
+                        }
+                    }
+                    
                 }
                 if (removed)
                 {
@@ -154,18 +293,10 @@ Product Storage::expired()
                 Product product = array[index];
 
                 if (array[index].GetExpiration().GetYear() < 0 ) continue;
-                if (array[index].GetExpiration() < today) //works ok but still cout all slots of one expired product
-                {                    
-                    ShiftProducts(index);
-                    is_expired = true;
-                }
-                if (is_expired)
+                if (array[index].GetExpiration() < today)
                 {
-                    cout<<"Deleted product! "<<endl;
-                   // cout<<product;
-                    return product;
-            
-                } 
+                    removeProduct(array[index].GetName(), array[index].GetQuantity());  
+                }
             }
         }
     }
@@ -175,10 +306,13 @@ Product Storage::expired()
 //clean vrushta samo 1viq produkt s iztekul srok i ne produljava s drugite
 
 //for log function 
-void Storage::SortByDate(Product storage[], int max_size)
+void Storage::SortByDate(Storage storage) //sorts them by the date they came in storage
 {
-    sort(storage, storage+max_size, compare);
+    sort(storage.array, storage.array+max_size, compare);
 }
+
+
+
 
 ostream& operator << (ostream& output, const Storage &storage)
 {

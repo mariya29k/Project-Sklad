@@ -18,7 +18,6 @@ class Storage
 
     private:
     int GetIndex (int i, int j, int k) const;
-    Date today;
     Product array [max_section * max_shelf * max_number];
     Product product = Product();
 
@@ -28,12 +27,18 @@ class Storage
     public:
 
     Storage();
-    Product GetStorage() const;
+   // Product GetStorage() const;
+    int GetSlots() const;
+    void put();
     bool addProduct(Product &product);
-    Product removeProduct(string name, double weight);
+    //bool add(Product &product);
+    //bool addSame(Product &product);
+    Product removeProduct(string name, int quantity);
     Product expired ();
     //void IncreaseAvailability(Product product);
-	void SortByDate(Product storage[], int max_size);
+	void SortByDate(Storage storage);
+
+
     
     friend ostream& operator << (ostream& output, const Storage &storage);
 
