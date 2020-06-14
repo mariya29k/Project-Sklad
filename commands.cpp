@@ -69,7 +69,7 @@ void Save ()
     else
     {
         StorageFile << storage;
-        cout<<"Info is safed! "<<endl;
+        cout<<"Info is saved! "<<endl;
         is_saved = true;
     }
         

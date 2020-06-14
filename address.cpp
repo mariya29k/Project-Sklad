@@ -84,7 +84,7 @@ using namespace std;
         {
             if (shelf == 0 && number == 0)
             {
-                cout<<"No place123 ";
+                cout<<"No placе";
             } 
             else
             {

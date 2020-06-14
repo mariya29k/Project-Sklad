@@ -40,7 +40,6 @@ int Storage::GetSlots() const
 
 
 
-//problem in addProduct
 //shifts products to the left
 void Storage::ShiftProducts (int index)
 {
@@ -82,13 +81,6 @@ void Storage::ShiftProductsRight(int index, Product product)
     
 }
 
-/*
-    1 2 3 4 5
-      ^
-    1 6 2 3 4 5
-*/
-
-
 //this function adds a product to a free address
 bool Storage::addProduct(Product &product)
 {
@@ -126,7 +118,7 @@ bool Storage::addProduct(Product &product)
                         else //ako v dqsno ot produkta ne ni e prazno shiftvame za da go zapishem
                         {
                             ShiftProductsRight(index+slots, product);
-                            product.SetAddress(Address(i,j,k)); //why safe the default address tho?
+                            product.SetAddress(Address(i,j,k)); 
                             return true;
                         } 
                     }
@@ -151,7 +143,7 @@ bool Storage::addProduct(Product &product)
                         } else return false;
                     }
 
-                    array[index].SetQuantity(array[index].GetQuantity()+1); //uvelichavame quantity ako sa edin i susht 
+                    array[index].SetQuantity(array[index].GetQuantity()+1); 
                     return false;  
                 }
 
@@ -192,7 +184,7 @@ Product Storage::removeProduct(string name, int quantity)
                 int index = GetIndex(i,j,k);
                 Product product = array[index];
                 bool removed = false;
-                if (array[index].GetName() == name) //shtoto produktite mi sa razhvurlqni
+                if (array[index].GetName() == name)
                 {
                     
                     if(array[index].GetQuantity() >= quantity)
@@ -220,7 +212,7 @@ Product Storage::removeProduct(string name, int quantity)
             }
         }
     } 
-    return Product();  //ako ne nameri takuv produkt     
+    return Product();   
 }
 
 
@@ -269,7 +261,7 @@ ostream& operator << (ostream& output, const Storage &storage)
             {   
                 
                 int index = storage.GetIndex(i,j,k);
-                if(!(storage.array[index] == storage.product)) //shtoto ne iskam da mi cout-va praznite produkti ama neshto ne se poluchava
+                if(!(storage.array[index] == storage.product))
                 {
                     output<<storage.array[index]<<endl;
                 }

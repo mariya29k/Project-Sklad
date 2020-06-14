@@ -19,7 +19,6 @@ Product::Product ()
     this->address = Address();
     SetComment("default");
     
-    
 }
 
 

@@ -92,7 +92,7 @@ using namespace std;
     {   
         if (year < 0)
         {
-            if (year == -1) //tva zaradi default constructor tova mi se struva kato only variant za fiksvane na problema
+            if (year == -1)
             {
                 return true;
             }
@@ -232,9 +232,9 @@ using namespace std;
         } else cout<<"Invalid date!"<<endl;
     }
 
-    istream& operator >> (istream& input, Date &date) //sloji validaciq
-    {
-       
+    istream& operator >> (istream& input, Date &date)
+    {   
+               
         input >> date.year >> date.month >> date.day;
 
         return input;

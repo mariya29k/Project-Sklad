@@ -26,15 +26,11 @@ class Storage
     public:
 
     Storage();
-   // Product GetStorage() const;
     int GetSlots() const;
     void put();
     bool addProduct(Product &product);
-    //bool add(Product &product);
-    //bool addSame(Product &product);
     Product removeProduct(string name, int quantity);
     Product expired ();
-    //void IncreaseAvailability(Product product);
 	void SortByDate(Storage storage);
 
 
