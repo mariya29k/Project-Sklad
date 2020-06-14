@@ -1,0 +1,72 @@
+Name: Bananas
+Expiration date: 2021-5-23
+Came in storage: 2020-2-3
+Manufacturer: Equador
+Weight: 12
+Availability: 1
+Address: 0-0-0
+Comment: Equador's finest bananas
+
+Name: Bananas
+Expiration date: 2021-5-23
+Came in storage: 2020-2-3
+Manufacturer: Equador
+Weight: 12
+Availability: 1
+Address: 0-0-0
+Comment: Equador's finest bananas
+
+Name: Chocolate
+Expiration date: 2021-4-23
+Came in storage: 2010-3-4
+Manufacturer: Belgium
+Weight: 13
+Availability: 1
+Address: 0-0-2
+Comment: White chocolate
+
+Name: Chocolate
+Expiration date: 2021-4-23
+Came in storage: 2010-3-4
+Manufacturer: Belgium
+Weight: 13
+Availability: 1
+Address: 0-0-2
+Comment: White chocolate
+
+Name: Wine
+Expiration date: 2024-3-5
+Came in storage: 2020-5-4
+Manufacturer: Cycle
+Weight: 30
+Availability: 1
+Address: 0-0-4
+Comment: The best white wine in the region
+
+Name: Wine
+Expiration date: 2024-3-5
+Came in storage: 2020-5-4
+Manufacturer: Cycle
+Weight: 30
+Availability: 1
+Address: 0-0-4
+Comment: The best white wine in the region
+
+Name: Wine
+Expiration date: 2024-3-5
+Came in storage: 2020-5-4
+Manufacturer: Cycle
+Weight: 30
+Availability: 1
+Address: 0-0-4
+Comment: The best white wine in the region
+
+Name: Waffles
+Expiration date: 2021-5-23
+Came in storage: 2020-3-4
+Manufacturer: Moreni
+Weight: 6
+Availability: 1
+Address: 0-0-7
+Comment: Chocolate waffles with cream
+
